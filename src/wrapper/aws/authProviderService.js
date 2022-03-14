@@ -41,10 +41,14 @@ const AuthProvider = () => {
       });
   };
 
-  const getAccessToken = async() => {
+  const getAccessToken = async () => {
     const session = await Auth.currentSession();
     return session.getIdToken().getJwtToken();
-  }
+  };
+
+  const logout = async () => {
+    await Auth.logout();
+  };
 
   return { initializeUiListner, federatedSignIn, getAccessToken };
 };

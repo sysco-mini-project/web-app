@@ -1,12 +1,17 @@
 import React, { Component } from "react";
+import { useContext, useEffect } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import { AuthService } from "./service/authService";
+import { UserContext } from "./context/userContext";
+import { Home } from "./screens/home";
 
 const App = () => {
   const authService = AuthService();
+  const { currentUser, setCurrentUser } = useContext(UserContext);
 
   authService.initializeUiListner((data) => {
+    console.log('in the app.js **********************')
     console.log(data);
 
     authService
@@ -14,6 +19,7 @@ const App = () => {
       .then((res) => {
         console.log("current user");
         console.log(res.data);
+        setCurrentUser(res.data);
       })
       .catch((err) => {
         console.log("error occurred in getting current user");
@@ -22,23 +28,26 @@ const App = () => {
   });
 
   return (
-    <div className="App">
-      <div className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h2>Welcome to React</h2>
-        <button
-          onClick={() => {
-            authService.federatedSignIn();
-          }}
-        >
-          {" "}
-          Signin
-        </button>
-      </div>
-      <p className="App-intro">
-        To get started, edit <code>src/App.js</code> and save to reload.
-      </p>
+    <div>
+      <Home></Home>
     </div>
+    // <div className="App">
+    //   <div className="App-header">
+    //     <img src={logo} className="App-logo" alt="logo" />
+    //     <h2>Welcome to {currentUser?.firstName ?? "React"}</h2>
+    //     <button
+    //       onClick={() => {
+    //         authService.federatedSignIn();
+    //       }}
+    //     >
+    //       {" "}
+    //       Signin
+    //     </button>
+    //   </div>
+    //   <p className="App-intro">
+    //     To get started, edit <code>src/App.js</code> and save to reload.
+    //   </p>
+    // </div>
   );
 };
 
