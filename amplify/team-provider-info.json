@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-syscominiapp-dev-131347-authRole",
+      "UnauthRoleArn": "arn:aws:iam::730492015407:role/amplify-syscominiapp-dev-131347-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::730492015407:role/amplify-syscominiapp-dev-131347-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-syscominiapp-dev-131347-deployment",
+      "UnauthRoleName": "amplify-syscominiapp-dev-131347-unauthRole",
+      "StackName": "amplify-syscominiapp-dev-131347",
+      "StackId": "arn:aws:cloudformation:us-east-1:730492015407:stack/amplify-syscominiapp-dev-131347/5487e7f0-a2a1-11ec-8a3d-125270761693",
+      "AmplifyAppId": "dgczmr8tgbotv"
+    },
+    "categories": {
+      "auth": {
+        "syscoMiniApp": {}
+      }
+    }
+  }
+}
