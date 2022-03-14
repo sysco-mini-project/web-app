@@ -1,13 +1,24 @@
 import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import { AuthProvider } from "./wrapper/aws/authProviderService";
+import { AuthService } from "./service/authService";
 
 const App = () => {
-  const authProvider = AuthProvider();
+  const authService = AuthService();
 
-  authProvider.initializeUiListner((data) => {
+  authService.initializeUiListner((data) => {
     console.log(data);
+
+    authService
+      .getCurrentUser()
+      .then((res) => {
+        console.log("current user");
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log("error occurred in getting current user");
+        console.log(err);
+      });
   });
 
   return (
@@ -17,7 +28,7 @@ const App = () => {
         <h2>Welcome to React</h2>
         <button
           onClick={() => {
-            authProvider.federatedSignIn();
+            authService.federatedSignIn();
           }}
         >
           {" "}
