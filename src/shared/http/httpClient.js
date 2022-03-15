@@ -9,7 +9,7 @@ const post = async (url, body, headers = defaultHeaders, intecept = true) => {
   return response;
 };
 
-const get = async (url, headers = defaultHeaders, intecept = true) => {
+const get = async (url, { headers = defaultHeaders, intecept = true }) => {
   const getHeaders = { ...defaultHeaders, ...headers };
 
   const response = await client(intecept).get(url, { headers: getHeaders });

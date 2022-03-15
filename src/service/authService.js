@@ -19,7 +19,7 @@ const AuthService = () => {
   }
 
   const getCurrentUser = async() => {
-    return await get(`${BASE_URL}/api/auth/account`)
+    return await get(`${BASE_URL}/api/auth/account`, {})
   }
 
   return { initializeUiListner, federatedSignIn, getCurrentUser, getAccessToken };
