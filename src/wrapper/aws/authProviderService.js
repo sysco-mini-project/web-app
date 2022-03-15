@@ -3,10 +3,10 @@ import awsAuth from "../../awsauth";
 import awsExports from "../../aws-exports";
 
 const AuthProvider = () => {
-  const initializeUiListner = (cb) => {
-    Amplify.configure(awsExports);
-    Auth.configure({ oauth: awsAuth });
+  Amplify.configure(awsExports);
+  Auth.configure({ oauth: awsAuth });
 
+  const initializeUiListner = (cb) => {
     Hub.listen("auth", ({ payload: { event, data } }) => {
       console.log("result received");
       switch (event) {
@@ -41,7 +41,16 @@ const AuthProvider = () => {
       });
   };
 
-  return { initializeUiListner, federatedSignIn };
+  const getAccessToken = async () => {
+    const session = await Auth.currentSession();
+    return session.getIdToken().getJwtToken();
+  };
+
+  const logout = async () => {
+    await Auth.logout();
+  };
+
+  return { initializeUiListner, federatedSignIn, getAccessToken };
 };
 
 export { AuthProvider };
