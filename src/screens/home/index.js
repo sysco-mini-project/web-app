@@ -10,13 +10,13 @@ const Home = () => {
   return (
     <Layout>
       <main className="home-contents">
-        <button
+        {/* <button
           onClick={() => {
             authService.federatedSignIn();
           }}
         >
           sign in
-        </button>
+        </button> */}
         <Routers></Routers>
       </main>
     </Layout>
