@@ -1,9 +1,12 @@
+import { CircularProgress } from "@mui/material";
+import { LayoutView } from "./styles";
+
 const Loader = () => {
+  return (
+    <LayoutView>
+      <CircularProgress/>
+    </LayoutView>
+  );
+};
 
-    return <div>
-        Loading.................
-    </div>
-
-}
-
-export {Loader}
+export { Loader };

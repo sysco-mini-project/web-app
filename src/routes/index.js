@@ -11,18 +11,20 @@ const Routers = () => {
   return (
     <Router>
       <Routes>
-        <Route exact path="/categories" element={<Category></Category>}/>
+        <Route exact path="/categories" element={<Category></Category>} />
 
-        <Route exact path="/products" element={<Product></Product>}/>
+        <Route exact path="/products" element={<Product></Product>} />
 
-
-        <Route exact path="/card" element={
-         <ProtectedRoute>
-             <Cart/>
-         </ProtectedRoute>
-        }/>
-
-      </Routes> 
+        <Route
+          exact
+          path="/card"
+          element={
+            <ProtectedRoute>
+              <Cart />
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
 
       {/* <PrivateRoute history={history}  path="/songs" exact >
               <Songs/>

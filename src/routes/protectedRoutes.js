@@ -1,52 +1,49 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Navigate } from "react-router-dom";
-import { Switch, Route } from "react-router";
 import { Loader } from "../componenets/loader";
 import { UserContext } from "../context/userContext";
-import { AuthService } from "../service/authService";
+import { ServiceLocator } from "../context/serviceProvider";
 
 const ProtectedRoute = ({ children }) => {
   const [isAuthenticated, setAuthenticated] = useState(false);
   const [isLoading, setLoading] = useState(true);
-  const userContext = useContext(UserContext);
-  const { currentUser, setCurrentUser } = userContext;
+  const { currentUser, setCurrentUser } = useContext(UserContext);
 
-  // const { element: Component, history, role = [], ...rest } = props;
+  const { authService } = useContext(ServiceLocator);
 
   useEffect(() => {
-
-    let isMounted = true; 
+    let isMounted = true;
     if (!currentUser) {
-      AuthService()
-        .getCurrentUser()
-        .then(
-          (user) => {
-            // const result = validateRole(user);
-            const result = true;
-            if (isMounted && result) {
-              setAuthenticated(true);
-              setLoading(false);
-              setCurrentUser(user);
-            } else {
-              alert("You do not have administration permission");
-              setAuthenticated(false);
-              setLoading(false);
-            }
-          },
-          (err) => {
-            if(isMounted){
-              setAuthenticated(false);
-              setLoading(false);
-            }
-            throw err;
+      authService.getCurrentUser().then(
+        (user) => {
+          // const result = validateRole(user);
+          const result = true;
+          if (isMounted && result) {
+            setAuthenticated(true);
+            setLoading(false);
+            setCurrentUser(user);
+          } else {
+            alert("You do not have administration permission");
+            setAuthenticated(false);
+            setLoading(false);
           }
-        );
+        },
+        (err) => {
+          if (isMounted) {
+            setAuthenticated(false);
+            setLoading(false);
+          }
+          throw err;
+        }
+      );
     } else {
       setLoading(false);
       setAuthenticated(true);
     }
 
-    return () => { isMounted = false }; 
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   const validateRole = (user) => {
@@ -60,27 +57,31 @@ const ProtectedRoute = ({ children }) => {
     return true;
   };
 
-  return (
-    isAuthenticated ? children : isLoading? <Loader />: <Navigate to="/home"/>
-    // <Route path = "/hello" element = {<Component />}/>
-    //    <Route
-    //   {...rest}
-    //   element={() =>
-    //     isAuthenticated ? (
-    //       <Component {...{ ...props, history }} />
-    //     ) : isLoading ? (
-    //       <Loader />
-    //     ) : (
-    //       <Navigate
-    //         to={{
-    //           pathname: "/categories",
-    //           state: { from: props.location },
-    //         }}
-    //       />
-    //     )
-    //   }
-    // />
+  return isAuthenticated ? (
+    children
+  ) : isLoading ? (
+    <Loader />
+  ) : (
+    <Navigate to="/home" />
   );
+  // <Route path = "/hello" element = {<Component />}/>
+  //    <Route
+  //   {...rest}
+  //   element={() =>
+  //     isAuthenticated ? (
+  //       <Component {...{ ...props, history }} />
+  //     ) : isLoading ? (
+  //       <Loader />
+  //     ) : (
+  //       <Navigate
+  //         to={{
+  //           pathname: "/categories",
+  //           state: { from: props.location },
+  //         }}
+  //       />
+  //     )
+  //   }
+  // />
 };
 
 export default ProtectedRoute;

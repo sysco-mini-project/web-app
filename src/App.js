@@ -1,17 +1,15 @@
 import React, { Component } from "react";
 import { useContext, useEffect } from "react";
-import logo from "./logo.svg";
-import "./App.css";
-import { AuthService } from "./service/authService";
 import { UserContext } from "./context/userContext";
 import { Home } from "./screens/home";
+import { ServiceLocator } from "./context/serviceProvider";
 
 const App = () => {
-  const authService = AuthService();
+  const { authService } = useContext(ServiceLocator);
   const { currentUser, setCurrentUser } = useContext(UserContext);
 
   authService.initializeUiListner((data) => {
-    console.log('in the app.js **********************')
+    console.log("in the app.js **********************");
     console.log(data);
 
     authService
@@ -28,9 +26,8 @@ const App = () => {
   });
 
   return (
-    <div>
-      <Home></Home>
-    </div>
+    <Home></Home>
+
     // <div className="App">
     //   <div className="App-header">
     //     <img src={logo} className="App-logo" alt="logo" />

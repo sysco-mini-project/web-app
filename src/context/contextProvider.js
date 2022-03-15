@@ -1,8 +1,12 @@
+import { ServiceProvider } from "./serviceProvider";
 import { UserProvider } from "./userContext";
 
-
 const ContextProvider = ({ children }) => {
-  return <UserProvider>{children}</UserProvider>;
+  return (
+    <ServiceProvider>
+      <UserProvider>{children}</UserProvider>;
+    </ServiceProvider>
+  );
 };
 
 export default ContextProvider;

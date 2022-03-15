@@ -1,20 +1,38 @@
+import { useContext } from "react";
+import { ServiceLocator } from "../../context/serviceProvider";
 import Routers from "../../routes";
 import { AuthService } from "../../service/authService";
+import Layout from "../layout";
 
 const Home = () => {
-  return (
-    <div>
-      <h1>This is Home page</h1>
+  const { authService } = useContext(ServiceLocator);
 
-      <button
-        onClick={() => {
-          AuthService().federatedSignIn();
-        }}
-      >
-        sign in
-      </button>
-      <Routers />
-    </div>
+  return (
+    <Layout>
+      <main className="home-contents">
+        <button
+          onClick={() => {
+            authService.federatedSignIn();
+          }}
+        >
+          sign in
+        </button>
+        <Routers></Routers>
+      </main>
+    </Layout>
+
+    // <div>
+    //   <h1>This is Home page</h1>
+
+    //   <button
+    //     onClick={() => {
+    //       AuthService().federatedSignIn();
+    //     }}
+    //   >
+    //     sign in
+    //   </button>
+    //   <Routers />
+    // </div>
   );
 };
 
