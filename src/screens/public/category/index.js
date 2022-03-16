@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import ItemCard from "../../../componenets/atoms/cards/card";
-import { Loader } from "../../../componenets/loader";
+import { CategoryCard } from "../../../componenets/categoryCard";
 import { ServiceLocator } from "../../../context/serviceProvider";
 import { useFetch } from "../../../hooks/useFetch";
+import { useNavigate } from "react-router-dom";
 import {
   CategoryContainer,
   CategoryMainContainer,
@@ -13,6 +13,7 @@ import {
 } from "./styles";
 
 const Category = () => {
+  let navigate = useNavigate();
   const { categoryService } = useContext(ServiceLocator);
 
   const [categories, error, loading] = useFetch(
@@ -40,10 +41,13 @@ const Category = () => {
             const constr = constructCardItem(category);
 
             return (
-              <ItemCard
+              <CategoryCard
                 key={category.id}
                 header={constr.header}
                 image={constr.image}
+                cb={() => {
+                  navigate(`/products/${category.id}`);
+                }}
               />
             );
           })}
