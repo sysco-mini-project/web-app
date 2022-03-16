@@ -8,11 +8,15 @@ const useFetch = (func) => {
   useEffect(() => {
     (async function () {
       try {
-        setLoading(true);
         const response = await func();
         setData(response.data);
+        setLoading(true);
+        
+       
+        // alert('data got')
       } catch (err) {
         setError(err);
+        alert('data error')
       } finally {
         setLoading(false);
       }

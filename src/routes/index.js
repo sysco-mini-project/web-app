@@ -13,7 +13,7 @@ const Routers = () => {
       <Routes>
         <Route exact path="/categories" element={<Category></Category>} />
 
-        <Route exact path="/products" element={<Product></Product>} />
+        <Route exact path="/products/:id" element={<Product></Product>} />
 
         <Route
           exact
@@ -25,10 +25,6 @@ const Routers = () => {
           }
         />
       </Routes>
-
-      {/* <PrivateRoute history={history}  path="/songs" exact >
-              <Songs/>
-            </PrivateRoute> */}
     </Router>
   );
 };
