@@ -15,8 +15,10 @@ const useFetch = (func) => {
        
         // alert('data got')
       } catch (err) {
+        console.log('errrrrrrrrrror ');
+        console.log(err)
         setError(err);
-        alert('data error')
+        // alert('data error')
       } finally {
         setLoading(false);
       }

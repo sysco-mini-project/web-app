@@ -1,7 +1,7 @@
 import { CircularProgress } from "@mui/material";
 import { LayoutView } from "./styles";
 
-const Loader = () => {
+const CustomLoader = () => {
   return (
     <LayoutView>
       <CircularProgress/>
@@ -9,4 +9,4 @@ const Loader = () => {
   );
 };
 
-export { Loader };
+export { CustomLoader };
