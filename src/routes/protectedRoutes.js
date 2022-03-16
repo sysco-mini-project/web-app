@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { Navigate } from "react-router-dom";
-import { Loader } from "../componenets/loader";
+import { CustomLoader } from "../componenets/loader";
 import { UserContext } from "../context/userContext";
 import { ServiceLocator } from "../context/serviceProvider";
 
@@ -60,28 +60,11 @@ const ProtectedRoute = ({ children }) => {
   return isAuthenticated ? (
     children
   ) : isLoading ? (
-    <Loader />
+    <CustomLoader />
   ) : (
     <Navigate to="/home" />
   );
-  // <Route path = "/hello" element = {<Component />}/>
-  //    <Route
-  //   {...rest}
-  //   element={() =>
-  //     isAuthenticated ? (
-  //       <Component {...{ ...props, history }} />
-  //     ) : isLoading ? (
-  //       <Loader />
-  //     ) : (
-  //       <Navigate
-  //         to={{
-  //           pathname: "/categories",
-  //           state: { from: props.location },
-  //         }}
-  //       />
-  //     )
-  //   }
-  // />
+
 };
 
 export default ProtectedRoute;

@@ -9,6 +9,7 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
+import { BottomBar } from "./styles";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -21,7 +22,16 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-const ItemCard = ({ header, image, description, actions = [] }) => {
+const DefaultBottom = () => <></>;
+
+const ItemCard = ({
+  header,
+  image,
+  description,
+  height = 194,
+  actions = [],
+  Bottom = DefaultBottom,
+}) => {
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
@@ -55,15 +65,16 @@ const ItemCard = ({ header, image, description, actions = [] }) => {
       {image ? (
         <CardMedia
           component="img"
-          height="194"
+          height={height}
           image={image}
           alt="Paella dish"
+          sx = {{backgroundPosition: 'contain'}}
         />
       ) : (
         <></>
       )}
       {description ? (
-        <CardContent>
+        <CardContent sx={{display : 'flex', flexDirection: 'row', alignItems : 'center', justifyContent: 'center'}}>
           <Typography variant="body2" color="text.secondary">
             {description}
           </Typography>
@@ -72,18 +83,7 @@ const ItemCard = ({ header, image, description, actions = [] }) => {
         <></>
       )}
 
-      {actions.length > 0 ? (
-        <CardActions disableSpacing>
-          <IconButton aria-label="add to favorites">
-            <FavoriteIcon />
-          </IconButton>
-          <IconButton aria-label="share">
-            <ShareIcon />
-          </IconButton>
-        </CardActions>
-      ) : (
-        <></>
-      )}
+      {Bottom ? <BottomBar>{Bottom()}</BottomBar> : <></>}
     </Card>
   );
 };

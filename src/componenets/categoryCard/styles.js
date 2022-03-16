@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const BaseCard = styled.div`
 width: 345px;
-height: 345px;
+height: 325px;
 position: relative;
 
 margin: 5px;

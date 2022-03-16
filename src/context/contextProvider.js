@@ -4,7 +4,7 @@ import { UserProvider } from "./userContext";
 const ContextProvider = ({ children }) => {
   return (
     <ServiceProvider>
-      <UserProvider>{children}</UserProvider>;
+      <UserProvider>{children}</UserProvider>
     </ServiceProvider>
   );
 };
