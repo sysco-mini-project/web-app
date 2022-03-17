@@ -6,7 +6,15 @@ const ProductService = () => {
     return await get(`${BASE_URL}/api/product/all/${id}`, { intecept: false });
   };
 
-  return { getAllProductsByCategory };
+  const getProductById = async (id) => {
+    return await get(`${BASE_URL}/api/product/${id}`, { intecept: false });
+  };
+
+  const getCategoryById = async (id) => {
+    return await get(`${BASE_URL}/api/category/${id}`, { intecept: false });
+  };
+
+  return { getAllProductsByCategory, getProductById, getCategoryById };
 };
 
 export { ProductService };

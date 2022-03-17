@@ -9,6 +9,7 @@ const useFetch = (func) => {
     (async function () {
       try {
         const response = await func();
+        console.log(response)
         setData(response.data);
         setLoading(true);
         
