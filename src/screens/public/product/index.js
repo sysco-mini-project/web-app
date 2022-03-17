@@ -21,7 +21,7 @@ const Product = () => {
 
   useEffect(() => {
     setAppBarConfigs((prev) => {
-      return { ...prev, name: "Products -> " };
+      return { ...prev, name: "Products -> " , searchBar : true};
     });
   }, []);
   return (

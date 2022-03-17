@@ -30,12 +30,12 @@ const CustomAppBar = (props) => {
     <HideOnScroll {...props}>
       <AppBarContainer>
         <AppBar className="appBar">
-          <Toolbar>
-            <Typography variant="h6" component="div">
+          <Toolbar className="tb">
+            <Typography variant="h6" component="div" className="comp">
               {appBarConfig.name ?? "App bar"}
             </Typography>
 
-            <SearchBar></SearchBar>
+            {appBarConfig.searchBar ? <SearchBar /> : <></>}
           </Toolbar>
         </AppBar>
       </AppBarContainer>

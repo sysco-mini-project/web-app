@@ -8,4 +8,15 @@ export const AppBarContainer = styled.div.attrs((props) => ({}))`
   .title {
     /* padding-left:'6px'; */
   }
+
+  .tb{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .comp{
+    flex: 1;
+  }
 `;

@@ -36,6 +36,7 @@ const SearchBar = () => {
           }}
           placeholder="Search product"
           inputProps={{ "aria-label": "Search product" }}
+          
         />
         <IconButton
           sx={{
