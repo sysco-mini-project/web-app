@@ -47,10 +47,10 @@ const AuthProvider = () => {
   };
 
   const logout = async () => {
-    await Auth.logout();
+    await Auth.signOut();
   };
 
-  return { initializeUiListner, federatedSignIn, getAccessToken };
+  return { initializeUiListner, federatedSignIn, getAccessToken, logout };
 };
 
 export { AuthProvider };

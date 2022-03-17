@@ -16,12 +16,14 @@ const ProtectedRoute = ({ children }) => {
     if (!currentUser) {
       authService.getCurrentUser().then(
         (user) => {
+          // console.log('usser data about to receieve')
           // const result = validateRole(user);
           const result = true;
           if (isMounted && result) {
             setAuthenticated(true);
             setLoading(false);
-            setCurrentUser(user);
+            setCurrentUser(user.data);
+            // console.log(user.data)
           } else {
             alert("You do not have administration permission");
             setAuthenticated(false);
@@ -33,7 +35,7 @@ const ProtectedRoute = ({ children }) => {
             setAuthenticated(false);
             setLoading(false);
           }
-          throw err;
+          // throw err;
         }
       );
     } else {
@@ -62,7 +64,7 @@ const ProtectedRoute = ({ children }) => {
   ) : isLoading ? (
     <CustomLoader />
   ) : (
-    <Navigate to="/home" />
+    <Navigate to="/loginRequired" />
   );
 
 };

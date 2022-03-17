@@ -9,13 +9,10 @@ const Login = () => {
   return (
     <div>
       <h1>Login page</h1>
-      
+
       <Bck>
-
-      <SearchBar></SearchBar>
+        <SearchBar></SearchBar>
       </Bck>
-
-     
 
       <button
         onClick={() => {
@@ -24,8 +21,17 @@ const Login = () => {
       >
         sign in
       </button>
+
+
+      <button
+        onClick={() => {
+          authService.signOut();
+        }}
+      >
+        sign out
+      </button>
     </div>
   );
 };
 
-export {Login}
+export { Login };

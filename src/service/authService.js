@@ -22,7 +22,11 @@ const AuthService = () => {
     return await get(`${BASE_URL}/api/auth/account`, {})
   }
 
-  return { initializeUiListner, federatedSignIn, getCurrentUser, getAccessToken };
+  const signOut = async() => {
+    return await authProvider.logout();
+  }
+
+  return { initializeUiListner, federatedSignIn, getCurrentUser, getAccessToken, signOut };
 };
 
 
