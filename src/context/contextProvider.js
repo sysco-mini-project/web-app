@@ -1,10 +1,13 @@
+import { AppBarConfigProvider } from "./appBarConfigProvider";
 import { ServiceProvider } from "./serviceProvider";
 import { UserProvider } from "./userContext";
 
 const ContextProvider = ({ children }) => {
   return (
     <ServiceProvider>
-      <UserProvider>{children}</UserProvider>
+      <AppBarConfigProvider>
+        <UserProvider>{children}</UserProvider>
+      </AppBarConfigProvider>
     </ServiceProvider>
   );
 };

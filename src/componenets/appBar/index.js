@@ -1,23 +1,46 @@
-import { AppBar, Avatar, Box, Button, IconButton, Toolbar, Typography } from "@mui/material";
-
+import {
+  AppBar,
+  Slide,
+  Toolbar,
+  Typography,
+  useScrollTrigger,
+} from "@mui/material";
+import { useContext } from "react";
+import { AppBarContext } from "../../context/appBarConfigProvider";
+import { SearchBar } from "../atoms/searchBar";
 import { AppBarContainer } from "./styles";
 
-const CustomAppBar = () => {
+const CustomAppBar = (props) => {
+  const { appBarConfig } = useContext(AppBarContext);
+
+  function HideOnScroll(props) {
+    const { children, window } = props;
+    const trigger = useScrollTrigger({
+      target: window ? window() : undefined,
+    });
+
     return (
-        <AppBarContainer>
-            {/* <Box sx={{ flexGrow: 1 }}>
-                <AppBar position="static" style={{ background: '#FFFFFF' }}>
-                    <Toolbar>
-                        <Avatar alt="Remy Sharp" src="https://previews.123rf.com/images/tatianasun/tatianasun1801/tatianasun180100064/93737696-icona-del-carrello-metti-nel-carrello-icona-dello-shopping-online-con-la-freccia-vettore-.jpg" />
-                        <Typography style={{ paddingLeft: '10px' }} className="title" variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                            Sysco
-                        </Typography>
-                        <Button color="inherit">Login</Button>
-                    </Toolbar>
-                </AppBar>
-            </Box> */}
-        </AppBarContainer>
+      <Slide appear={false} direction="down" in={!trigger}>
+        {children}
+      </Slide>
     );
-}
+  }
+
+  return (
+    <HideOnScroll {...props}>
+      <AppBarContainer>
+        <AppBar className="appBar">
+          <Toolbar>
+            <Typography variant="h6" component="div">
+              {appBarConfig.name ?? "App bar"}
+            </Typography>
+
+            <SearchBar></SearchBar>
+          </Toolbar>
+        </AppBar>
+      </AppBarContainer>
+    </HideOnScroll>
+  );
+};
 
 export default CustomAppBar;

@@ -6,8 +6,10 @@ import Button from "@mui/material/Button";
 import { CardTravel } from "@mui/icons-material";
 
 const ProductCard = ({ item, width: w, height: h }) => {
+
   const avatar = <Avatar alt="Remy Sharp" src={item.producerImage} />;
   const title = item.producer;
+  const subheader = `Rs : ${item.price} /=`
 
   const addToCartBtn = () => (
     <ButtomBar>
@@ -20,7 +22,7 @@ const ProductCard = ({ item, width: w, height: h }) => {
   return (
     <BaseCard key={item.id} height={h} width={w}>
       <ItemCard
-        header={{ avatar, title }}
+        header={{ avatar, title, subheader }}
         image={item.image}
         className="box"
         height="250"

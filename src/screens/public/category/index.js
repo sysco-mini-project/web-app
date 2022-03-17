@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { CategoryCard } from "../../../componenets/categoryCard";
 import { ServiceLocator } from "../../../context/serviceProvider";
 import { useFetch } from "../../../hooks/useFetch";
@@ -11,14 +11,24 @@ import {
   Row,
   TextBar,
 } from "./styles";
+import { AppBarContext } from "../../../context/appBarConfigProvider";
 
 const Category = () => {
   let navigate = useNavigate();
   const { categoryService } = useContext(ServiceLocator);
+  const { setAppBarConfigs } = useContext(AppBarContext);
 
   const [categories, error, loading] = useFetch(
     categoryService.getAllCategories
   );
+
+
+  useEffect(() => {
+    setAppBarConfigs((prev) => {
+      return { ...prev, name: "Categories" };
+    });
+  }, []);
+
 
   const constructCardItem = (category) => {
     const header = {
