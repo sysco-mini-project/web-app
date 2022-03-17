@@ -5,7 +5,7 @@ import { BaseCard, ButtomBar } from "./styles";
 import Button from "@mui/material/Button";
 import { CardTravel } from "@mui/icons-material";
 
-const ProductCard = ({ item, width: w, height: h }) => {
+const ProductCard = ({ item, width: w, height: h,  clickCb}) => {
 
   const avatar = <Avatar alt="Remy Sharp" src={item.producerImage} />;
   const title = item.producer;
@@ -13,7 +13,7 @@ const ProductCard = ({ item, width: w, height: h }) => {
 
   const addToCartBtn = () => (
     <ButtomBar>
-      <Button ariant="outlined" startIcon={<CardTravel />}>
+      <Button ariant="outlined" startIcon={<CardTravel />}  onClick = {() => {clickCb(item.id)}}>
         Add to Cart
       </Button>
     </ButtomBar>

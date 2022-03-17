@@ -1,5 +1,5 @@
 import { useCallback, useContext, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { ProductCard } from "../../../componenets/productCard";
 import { AppBarContext } from "../../../context/appBarConfigProvider";
 import { ServiceLocator } from "../../../context/serviceProvider";
@@ -8,6 +8,7 @@ import { ProductContainer, ProductMainWrapper, Row, StickDiv } from "./styles";
 
 const Product = () => {
   let params = useParams();
+  let navigate = useNavigate();
 
   const { productService } = useContext(ServiceLocator);
   const { setAppBarConfigs } = useContext(AppBarContext);
@@ -24,12 +25,18 @@ const Product = () => {
       return { ...prev, name: "Products -> " , searchBar : true};
     });
   }, []);
+
+  const clickCb = useCallback((id) => {
+
+    navigate(`/addToCart/${id}`);
+
+  }, null)
   return (
     <ProductMainWrapper>
       <ProductContainer>
         <Row>
           {(products ?? []).map((item) => {
-            return ProductCard({ item, height: "345px", width: "345px" });
+            return ProductCard({ item, height: "345px", width: "345px" , clickCb});
           })}
         </Row>
       </ProductContainer>

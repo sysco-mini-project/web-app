@@ -7,6 +7,8 @@ import { Category } from "../screens/public/category";
 import { Cart } from "../screens/private/cart";
 import ProtectedRoute from "./protectedRoutes";
 import { Login } from "../screens/public/login/login";
+import { AddToCart } from "../screens/private/addtoCart";
+import { LoginRequiredPage } from "../screens/public/loginrequired";
 
 const Routers = () => {
   return (
@@ -16,14 +18,26 @@ const Routers = () => {
 
         <Route exact path="/products/:id" element={<Product></Product>} />
 
-        <Route exact path="/login" element={<Login/>} />
+        <Route exact path="/login" element={<Login />} />
+
+        <Route exact path="/loginRequired" element={<LoginRequiredPage />} />
 
         <Route
           exact
-          path="/card"
+          path="/cart"
           element={
             <ProtectedRoute>
               <Cart />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          exact
+          path="/addToCart/:id"
+          element={
+            <ProtectedRoute>
+              <AddToCart />
             </ProtectedRoute>
           }
         />

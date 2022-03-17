@@ -5,13 +5,9 @@ import Routers from "../../routes";
 import Layout from "../layout";
 
 const Home = () => {
-
   const { setAppBarConfigs } = useContext(AppBarContext);
 
-  useEffect(()=> {
-
-  },[])
-
+  useEffect(() => {}, []);
 
   return (
     <Layout>

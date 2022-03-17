@@ -19,4 +19,8 @@ export const AppBarContainer = styled.div.attrs((props) => ({}))`
   .comp{
     flex: 1;
   }
+
+  .buttonBox {
+    margin: 0px 5px 0px 12px;
+  }
 `;

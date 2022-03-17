@@ -9,14 +9,11 @@ const App = () => {
   const { currentUser, setCurrentUser } = useContext(UserContext);
 
   authService.initializeUiListner((data) => {
-    console.log("in the app.js **********************");
-    console.log(data);
 
+    console.log(data)
     authService
       .getCurrentUser()
       .then((res) => {
-        console.log("current user");
-        console.log(res.data);
         setCurrentUser(res.data);
       })
       .catch((err) => {
