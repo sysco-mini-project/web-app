@@ -1,38 +1,39 @@
-import { useContext, useEffect } from "react";
+import { useCallback, useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { ProductCard } from "../../../componenets/productCard";
+import { AppBarContext } from "../../../context/appBarConfigProvider";
 import { ServiceLocator } from "../../../context/serviceProvider";
 import { useFetch } from "../../../hooks/useFetch";
-import { ProductContainer, ProductMainWrapper, Row } from "./styles";
+import { ProductContainer, ProductMainWrapper, Row, StickDiv } from "./styles";
 
 const Product = () => {
   let params = useParams();
 
   const { productService } = useContext(ServiceLocator);
+  const { setAppBarConfigs } = useContext(AppBarContext);
 
-  const [products, error, loading] = useFetch(
-    async () => await productService.getAllProductsByCategory(params.id)
+  const fetchData = useCallback(
+    async () => await productService.getAllProductsByCategory(params.id),
+    []
   );
 
+  const [products, error, loading] = useFetch(fetchData);
+
+  useEffect(() => {
+    setAppBarConfigs((prev) => {
+      return { ...prev, name: "Products -> " };
+    });
+  }, []);
   return (
     <ProductMainWrapper>
       <ProductContainer>
         <Row>
           {(products ?? []).map((item) => {
-            return ProductCard({item, height : "345px", width: "345px"});
+            return ProductCard({ item, height: "345px", width: "345px" });
           })}
         </Row>
       </ProductContainer>
     </ProductMainWrapper>
-    // <div>
-    //   <h1>This is Product page</h1>
-
-    //   {products && products.length == 0 ? (
-    //     <h1>Loading</h1>
-    //   ) : (
-    //     <h1>data loader</h1>
-    //   )}
-    // </div>
   );
 };
 
