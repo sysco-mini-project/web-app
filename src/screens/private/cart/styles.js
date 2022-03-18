@@ -3,16 +3,15 @@ import styled from "styled-components";
 export const MainCartContainer = styled.div`
   width: 100%;
   height: 98%;
-  margin-top: 100px;
-  /* background: green; */
+  margin-top: 30px;
+
   display: flex;
   flex-direction: row;
   justify-content: center;
 
   .left {
-    float: left;
-    width: 25%;
-    /* background: red; */
+    flex: 1;
+
     height: 100%;
     overflow: scroll;
     -ms-overflow-style: none; /* IE and Edge */
@@ -20,9 +19,7 @@ export const MainCartContainer = styled.div`
   }
 
   .right {
-    float: right;
-    width: 35%;
-    /* background: blue; */
+    flex: 3;
     height: 100%;
     overflow: scroll;
     display: flex;
@@ -44,13 +41,12 @@ export const MainCartContainer = styled.div`
 
 export const RightMainContainer = styled.div`
   height: 100%;
-  width: 90%;
+  width: 60%;
   margin-top: 0px;
 
   .title {
     display: flex;
     flex-direction: row;
-    /* justify-content: center; */
     align-items: center;
 
     .name {

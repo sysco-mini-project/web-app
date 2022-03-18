@@ -39,7 +39,7 @@ const ProtectedRoute = ({ children }) => {
             setAuthenticated(false);
             setLoading(false);
           }
-          // throw err;
+          throw err;
         }
       );
     } else {

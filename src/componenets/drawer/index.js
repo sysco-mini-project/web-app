@@ -6,19 +6,46 @@ import {
   ListItemIcon,
   Toolbar,
   ListItemText,
+  Avatar,
 } from "@mui/material";
 import { useContext } from "react";
 
-import InboxIcon from "@mui/icons-material/MoveToInbox";
 import { AppBarContext } from "../../context/appBarConfigProvider";
 
-import { ShoppingBag } from "@mui/icons-material";
-
-import MenuIcon from "@mui/icons-material/Menu";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import { Category, LogoutSharp, ShoppingCart } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
+import { ProfileContainer } from "./styles";
+import { UserContext } from "../../context/userContext";
+import { orange } from "@mui/material/colors";
 
 const CustomDrawer = () => {
+  const navigate = useNavigate();
+  const { currentUser, setCurrentUser } = useContext(UserContext);
+
+  const navigateCb = (path) => () => {
+    navigate(path);
+  };
+
+  const navigations = [
+    {
+      Icon: Category,
+      name: "Categories",
+      navigation: navigateCb("/categories"),
+    },
+
+    {
+      Icon: ShoppingCart,
+      name: "My Carts",
+      navigation: navigateCb("/cart"),
+    },
+
+    {
+      Icon: LogoutSharp,
+      name: "Logout",
+      navigation: () => {},
+    },
+  ];
+
   const { appBarConfig } = useContext(AppBarContext);
   return (
     <Drawer
@@ -34,28 +61,37 @@ const CustomDrawer = () => {
       anchor="left"
     >
       <Toolbar />
+
+      <ProfileContainer>
+        <Avatar
+          sx={{ bgcolor: orange[500], color: "white" }}
+          aria-label="recipe"
+        >
+          {currentUser?.firstName?.charAt(0)?.toUpperCase()}
+        </Avatar>
+
+        <h3>
+          {currentUser?.firstName} {currentUser?.lastName}
+        </h3>
+      </ProfileContainer>
+
       <Divider />
+      <Drawer />
       <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <ShoppingBag />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
+        {navigations.map((item, index) => {
+          const { Icon } = item;
+
+          return (
+            <ListItem button key={item.name} onClick={item.navigation}>
+              <ListItemIcon>
+                <Icon />
+              </ListItemIcon>
+              <ListItemText primary={item.name} />
+            </ListItem>
+          );
+        })}
       </List>
       <Divider />
-      <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <ShoppingBag />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
     </Drawer>
   );
 };

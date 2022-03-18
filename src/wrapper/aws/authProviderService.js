@@ -2,9 +2,12 @@ import Amplify, { Auth, Hub, API } from "aws-amplify";
 import awsAuth from "../../awsauth";
 import awsExports from "../../aws-exports";
 
+Amplify.configure(awsExports);
+Auth.configure({ oauth: awsAuth });
+
+
+
 const AuthProvider = () => {
-  Amplify.configure(awsExports);
-  Auth.configure({ oauth: awsAuth });
 
   const initializeUiListner = (cb) => {
     Hub.listen("auth", ({ payload: { event, data } }) => {
@@ -42,7 +45,23 @@ const AuthProvider = () => {
   };
 
   const getAccessToken = async () => {
-    const session = await Auth.currentSession();
+
+    
+    let session = await Auth.currentSession();
+
+    if (!session.isValid()) {
+      console.log(" Session is invalid -------------------------");
+      const cognitoUser = await Auth.currentAuthenticatedUser();
+      const currentSession = await Auth.currentSession();
+
+      await cognitoUser.refreshSession(currentSession.refreshToken);
+      session = await Auth.currentSession();
+    } else {
+      console.log(" Session is valie -------------------------");
+    }
+
+    session = await Auth.currentSession();
+
     return session.getIdToken().getJwtToken();
   };
 

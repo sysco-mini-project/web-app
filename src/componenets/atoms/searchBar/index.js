@@ -5,15 +5,16 @@ import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import { Search } from "./style";
 import { Cancel } from "@mui/icons-material";
+import { SearchValueContext } from "../../../context/SearchValueProvider";
 
 const SearchBar = () => {
   const [focused, setFoucused] = React.useState(false);
-  // const [radius, setRadius] = React.useState("50%");
+  const {  setSearchValue,} = React.useContext(SearchValueContext);
+  
   return (
     <Search>
       <Paper
         className="searchBox"
-        
         sx={{
           display: "flex",
           alignItems: "center",
@@ -28,11 +29,10 @@ const SearchBar = () => {
             flex: 1,
             backgroundColor: "transparent",
             paddingLeft: focused ? "40px" : "0px",
-            disableUnderline:true
+            disableUnderline: true,
           }}
           placeholder="Search product"
-          inputProps={{ "aria-label": "Search product", }}
-          
+          inputProps={{ "aria-label": "Search product" }} 
         />
         <IconButton
           sx={{

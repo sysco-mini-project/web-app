@@ -1,22 +1,14 @@
-import {
-  AppBar,
-  Avatar,
-  Slide,
-  Toolbar,
-  Typography,
-  useScrollTrigger,
-} from "@mui/material";
+import { AppBar, Avatar, Toolbar, Typography } from "@mui/material";
 import { useCallback, useContext } from "react";
 import { AppBarContext } from "../../context/appBarConfigProvider";
 import { SearchBar } from "../atoms/searchBar";
-import { AppBarContainer, ShoppingCartContainer } from "./styles";
+import { AppBarContainer } from "./styles";
 import { OutLinedButton } from "../atoms/button/outLinedButton";
 import { ServiceLocator } from "../../context/serviceProvider";
 import { UserContext } from "../../context/userContext";
-import { IcnButton } from "../atoms/button/iconButton";
-import { orange, red } from "@mui/material/colors";
-import { ShoppingCart } from "@mui/icons-material";
-import { Link, useNavigate } from "react-router-dom";
+import { orange } from "@mui/material/colors";
+import { useNavigate } from "react-router-dom";
+import { SearchValueContext } from "../../context/SearchValueProvider";
 
 const CustomAppBar = (props) => {
   const { appBarConfig } = useContext(AppBarContext);
@@ -25,12 +17,12 @@ const CustomAppBar = (props) => {
   const navigate = useNavigate();
 
   const { currentUser, setCurrentUser } = useContext(UserContext);
+  
 
-
+  
   const signInCb = useCallback(() => {
     authService.federatedSignIn();
   }, []);
-
 
   return (
     <AppBarContainer>
@@ -46,11 +38,16 @@ const CustomAppBar = (props) => {
             {appBarConfig.name ?? "App bar"}
           </Typography>
 
-          {appBarConfig.searchBar ? <div className="search-box"><SearchBar /> </div>: <></>}
+          {appBarConfig.searchBar ? (
+            <div className="search-box">
+              <SearchBar />{" "}
+            </div>
+          ) : (
+            <></>
+          )}
 
           {currentUser ? (
             <div className="visible-to-logged-user">
-      
               <Avatar
                 sx={{ bgcolor: "white", color: orange[500] }}
                 aria-label="recipe"

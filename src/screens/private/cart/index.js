@@ -92,6 +92,7 @@ const Cart = () => {
   const RightContainer = () => {
     return (
       <RightMainContainer>
+        <h3>Cart Details</h3>
         <div className="title">
           <ShoppingCart color="success" />
           <div className="name">{cart.name}</div>
@@ -142,7 +143,6 @@ const Cart = () => {
       </div>
 
       <div className="right">
-        <h3>Cart Details</h3>
         {cart ? (
           <RightContainer />
         ) : loading ? (
