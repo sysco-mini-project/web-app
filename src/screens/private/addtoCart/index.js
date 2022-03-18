@@ -40,6 +40,7 @@ const AddToCart = () => {
   const [cart, setCart] = React.useState(-1);
   const [activeStep, setActiveStep] = React.useState(0);
   const [saved, setSaved] = React.useState(false);
+  const navigate = useNavigate();
 
   const { setAppBarConfigs } = useContext(AppBarContext);
   const { productService, cartService } = useContext(ServiceLocator);
@@ -111,7 +112,13 @@ const AddToCart = () => {
           Successfully added {quantity} items of {product.name} to the cart
         </div>
 
-        <OutLinedButton name="Continue Shopping" backgroundColor="orange"/>
+        <OutLinedButton
+          name="Continue Shopping"
+          backgroundColor="orange"
+          clickCb={() => {
+            navigate(-1);
+          }}
+        />
       </PostSavedMessageContainer>
     );
   };
@@ -265,20 +272,24 @@ const AddToCart = () => {
         <List
           sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
         >
-          {(data?.carts ?? []).map((item) => {
-            const subTitle = `${item.totalItems} items - `;
-            const rest = `Rs ${item.totalPrice} /=`;
+          {(data?.carts ?? []).length > 0 ? (
+            (data?.carts ?? []).map((item) => {
+              const subTitle = `${item.totalItems} items - `;
+              const rest = `Rs ${item.totalPrice} /=`;
 
-            return CustomListItem({
-              id: item.id,
-              title: item.name,
-              subTitle,
-              subTitle,
-              rest,
-              color: cart === item.id ? "orange" : "transparent",
-              onCartListItemClicked,
-            });
-          })}
+              return CustomListItem({
+                id: item.id,
+                title: item.name,
+                subTitle,
+                subTitle,
+                rest,
+                color: cart === item.id ? "orange" : "transparent",
+                onCartListItemClicked,
+              });
+            })
+          ) : (
+            <h3>No carts found.</h3>
+          )}
         </List>
       </StepTwoContainer>
     );
