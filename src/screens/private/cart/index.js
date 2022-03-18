@@ -128,7 +128,7 @@ const Cart = () => {
         ) : loading ? (
           <h2>Loading...</h2>
         ) : (
-          <h3>No carts created. </h3>
+          <h3>No products added. </h3>
         )}
       </RightMainContainer>
     );
