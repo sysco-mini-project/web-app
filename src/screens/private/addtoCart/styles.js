@@ -1,13 +1,13 @@
 import styled from "styled-components";
 
 export const StepperWrapper = styled.div`
-  width: 100vw;
+  width: 100%;
   height: 100%;
-  align-items: center;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  margin-top: 100px;
+  justify-content: start;
+  align-items: center;
+  /* background-color: red; */
 `;
 
 export const StepOneContainer = styled.div`
@@ -22,7 +22,7 @@ export const StepOneContainer = styled.div`
 export const BaseCard = styled.div`
   width: 345px;
   height: 500px;
-  margin: 40px 8px 30px 8px;
+  /* margin: 40px 8px 30px 8px; */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -57,12 +57,12 @@ export const StepTwoContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
 
   .add-cart-btn-container {
     width: 100%;
     height: 50px;
-    margin-top: 50px;
+    margin-top: 20px;
     /* background-color: red; */
     display: flex;
     flex-direction: row;
@@ -91,12 +91,11 @@ export const CartItemContainer = styled.div`
   justify-content: flex-start;
   align-items: center;
 
-  .cartName{
+  .cartName {
     font-family: sans-serif;
     margin-left: 10px;
   }
 `;
-
 
 export const PostSavedMessageContainer = styled.div`
   width: 100%;
@@ -108,9 +107,48 @@ export const PostSavedMessageContainer = styled.div`
   justify-content: flex-start;
   align-items: center;
 
-  .msgText{
+  .msgText {
     margin: 20px 0px;
     font-family: sans-serif;
     margin-left: 10px;
+  }
+`;
+
+export const StepContainer = styled.div`
+  width: 100%;
+  height: 600px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  /* background-color: blue; */
+  padding: 10px;
+
+  .back-btn-container {
+    display: flex;
+    flex: 1;
+    /* background-color: red; */
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    height: 100%; 
+  }
+
+  .step-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 2;
+    /* background-color: green; */
+  }
+
+  .next-btn-container {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    /* background-color: yellow; */
+    height: 100%;
   }
 `;

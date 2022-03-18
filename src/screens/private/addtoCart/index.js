@@ -9,13 +9,12 @@ import Box from "@mui/material/Box";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
 import {
   BaseCard,
   CartItemContainer,
   PostSavedMessageContainer,
   Quantity,
+  StepContainer,
   StepOneContainer,
   StepperWrapper,
   StepTwoContainer,
@@ -23,12 +22,7 @@ import {
 import ItemCard from "../../../componenets/atoms/cards/card";
 import { Avatar, List } from "@mui/material";
 import { IcnButton } from "../../../componenets/atoms/button/iconButton";
-import {
-  AddShoppingCart,
-  PlusOne,
-  Remove,
-  ShoppingCartCheckout,
-} from "@mui/icons-material";
+import { PlusOne, Remove, ShoppingCartCheckout } from "@mui/icons-material";
 import CreateCartDialog from "../../../componenets/dialogs/createCart";
 import { CustomListItem } from "../../../componenets/listItem";
 import { OutLinedButton } from "../../../componenets/atoms/button/outLinedButton";
@@ -73,6 +67,11 @@ const AddToCart = () => {
   }, []);
 
   const steps = ["Add Quantity", "Select Cart", "Add to Cart"];
+  const detailedSteps = [
+    "Add Quantity",
+    "Select the cart to add the product",
+    "Finish Review",
+  ];
 
   const validators = [
     {
@@ -142,7 +141,7 @@ const AddToCart = () => {
     };
 
     return (
-      <Box sx={{ width: "50%", height: "100%" }}>
+      <Box sx={{ width: "100%", height: "100%" }}>
         <Stepper activeStep={activeStep}>
           {steps.map((label, index) => {
             const stepProps = {};
@@ -156,12 +155,9 @@ const AddToCart = () => {
           })}
         </Stepper>
 
-        <Typography sx={{ mt: 2, mb: 1 }}>{steps[activeStep]}</Typography>
-        <>{children[activeStep]}</>
-
         {activeStep < steps.length ? (
-          <React.Fragment>
-            <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
+          <StepContainer>
+            <div className="back-btn-container">
               <OutLinedButton
                 name="Back"
                 backgroundColor="orange"
@@ -169,17 +165,20 @@ const AddToCart = () => {
                 clickCb={handleBack}
                 disabled={activeStep === 0}
               />
-
-              <Box sx={{ flex: "1 1 auto" }} />
-
+            </div>
+            <div className="step-container">
+              <h3>{detailedSteps[activeStep]}</h3>
+              {children[activeStep]}
+            </div>
+            <div className="next-btn-container">
               <OutLinedButton
                 name={activeStep === steps.length - 1 ? "Finish" : "Next"}
                 backgroundColor="orange"
                 color="white"
                 clickCb={handleNext}
               />
-            </Box>
-          </React.Fragment>
+            </div>
+          </StepContainer>
         ) : !saved ? (
           <h3>Saving...................</h3>
         ) : (
@@ -202,7 +201,7 @@ const AddToCart = () => {
               header={{ avatar, title, subheader }}
               image={product.image}
               className="box"
-              height="250"
+              height="240"
               description={product.name}
             />
 
