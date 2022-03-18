@@ -22,13 +22,11 @@ const Category = () => {
     categoryService.getAllCategories
   );
 
-
   useEffect(() => {
     setAppBarConfigs((prev) => {
       return { ...prev, name: "Categories" };
     });
   }, []);
-
 
   const constructCardItem = (category) => {
     const header = {
@@ -40,30 +38,56 @@ const Category = () => {
 
   return (
     <CategoryMainContainer>
-      <ParallaxContainer></ParallaxContainer>
       <TextBar>Begin your shopping Journey Today</TextBar>
 
-      <CategoryText>Out Categories</CategoryText>
-      <CategoryContainer>
-        <Row>
-          {" "}
-          {(categories ?? []).map((category) => {
-            const constr = constructCardItem(category);
+      <ParallaxContainer></ParallaxContainer>
 
-            return (
-              <CategoryCard
-                key={category.id}
-                header={constr.header}
-                image={constr.image}
-                cb={() => {
-                  navigate(`/products/${category.id}`);
-                }}
-              />
-            );
-          })}
-        </Row>
-      </CategoryContainer>
+      <CategoryText>Out Categories</CategoryText>
+
+      <Row>
+        {(categories ?? []).map((category) => {
+          const constr = constructCardItem(category);
+
+          return (
+            <CategoryCard
+              key={category.id}
+              header={constr.header}
+              image={constr.image}
+              cb={() => {
+                navigate(`/products/${category.id}`);
+              }}
+            />
+          );
+        })}
+      </Row>
     </CategoryMainContainer>
+
+    // <CategoryMainContainer>
+    //
+
+    //   <TextBar>Begin your shopping Journey Today</TextBar>
+
+    //   <CategoryText>Out Categories</CategoryText>
+    //   <CategoryContainer>
+    //     <Row>
+    //       {" "}
+    //       {(categories ?? []).map((category) => {
+    //         const constr = constructCardItem(category);
+
+    //         return (
+    //           <CategoryCard
+    //             key={category.id}
+    //             header={constr.header}
+    //             image={constr.image}
+    //             cb={() => {
+    //               navigate(`/products/${category.id}`);
+    //             }}
+    //           />
+    //         );
+    //       })}
+    //     </Row>
+    //   </CategoryContainer>
+    // </CategoryMainContainer>
 
     // <div>
     //   <h1>This is category page</h1>

@@ -1,12 +1,36 @@
+import * as React from "react";
+import Box from "@mui/material/Box";
+import CssBaseline from "@mui/material/CssBaseline";
+// import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import { AppBarContext } from "../../context/appBarConfigProvider";
+
+// import { AppBar } from "@mui/material";
+
+import { CustomDrawer } from "../../componenets/drawer";
 import CustomAppBar from "../../componenets/appBar";
-import { LayoutView } from "./style";
 
 const Layout = ({ children, ...rest }) => {
+  const { appBarConfig } = React.useContext(AppBarContext);
+
   return (
-    <LayoutView>
-      <CustomAppBar></CustomAppBar>
-      <main className="contents">{children}</main>
-    </LayoutView>
+    <Box sx={{ display: "flex" }}>
+      <CssBaseline />
+
+      <CustomAppBar />
+
+      <CustomDrawer />
+
+      <Box
+        component="main"
+        sx={{ flexGrow: 1, bgcolor: "background.default", p: 3 }}
+      >
+        <Toolbar />
+
+        <main>{children}</main>
+      </Box>
+    </Box>
   );
 };
 

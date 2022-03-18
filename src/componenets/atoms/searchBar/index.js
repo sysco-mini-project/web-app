@@ -13,13 +13,12 @@ const SearchBar = () => {
     <Search>
       <Paper
         className="searchBox"
-        component="form"
+        
         sx={{
-          p: "2px 2px",
           display: "flex",
           alignItems: "center",
           borderRadius: focused ? "1%" : "50%",
-          width: focused ? 400 : 40,
+          width: focused ? 400 : 0,
           backgroundColor: focused ? "white" : "transparent",
         }}
       >

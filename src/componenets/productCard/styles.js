@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const BaseCard = styled.div`
-  width: 345px;
-  height: 390px;
+  width: ${props => props.width };
+  height: ${props => props.height };
   margin: 40px 8px 30px 8px;
 `;
 

@@ -25,7 +25,7 @@ const ProductCard = ({ item, width: w, height: h,  clickCb}) => {
         header={{ avatar, title, subheader }}
         image={item.image}
         className="box"
-        height="250"
+        height="194"
         description={item.name}
         Bottom={addToCartBtn}
       />

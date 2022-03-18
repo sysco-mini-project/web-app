@@ -33,13 +33,13 @@ const Product = () => {
   }, null)
   return (
     <ProductMainWrapper>
-      <ProductContainer>
+  
         <Row>
           {(products ?? []).map((item) => {
-            return ProductCard({ item, height: "345px", width: "345px" , clickCb});
+            return ProductCard({ item, height: "320px", width: "300px" , clickCb});
           })}
         </Row>
-      </ProductContainer>
+  
     </ProductMainWrapper>
   );
 };

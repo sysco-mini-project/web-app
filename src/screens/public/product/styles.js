@@ -1,10 +1,8 @@
 import styled from "styled-components";
 
 export const ProductMainWrapper = styled.div.attrs((props) => ({}))`
-  width: 100vw;
+  width: 100%;
   height: 100%;
-  margin-top: 50px;
-  padding: 0;
   display: flex;
   flex-direction: column;
   align-items: center;

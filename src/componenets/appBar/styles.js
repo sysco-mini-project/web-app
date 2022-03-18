@@ -1,27 +1,18 @@
 import styled from "styled-components";
 
 export const AppBarContainer = styled.div.attrs((props) => ({}))`
-  .appBar {
-    background-color: #f37021;
-  }
-
-  .title {
-    /* padding-left:'6px'; */
-  }
+  background-color: #f37021;
 
   .tb {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    padding-right: 50px;
   }
 
   .comp {
     flex: 1;
-  }
-
-  .buttonBox {
-    margin: 0px 5px 0px 12px;
   }
 
   .visible-to-logged-user {
@@ -29,6 +20,11 @@ export const AppBarContainer = styled.div.attrs((props) => ({}))`
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    margin: 0px 5px 0px 12px;
+  }
+
+  .search-box {
+    padding-right: 25px;
   }
 `;
 
