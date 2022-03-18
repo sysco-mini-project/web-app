@@ -26,26 +26,11 @@ const CustomAppBar = (props) => {
 
   const { currentUser, setCurrentUser } = useContext(UserContext);
 
-  function HideOnScroll(props) {
-    const { children, window } = props;
-    const trigger = useScrollTrigger({
-      target: window ? window() : undefined,
-    });
-
-    return (
-      <Slide appear={false} direction="down" in={!trigger}>
-        {children}
-      </Slide>
-    );
-  }
 
   const signInCb = useCallback(() => {
     authService.federatedSignIn();
   }, []);
 
-  const clickCart = useCallback(() => {
-    navigate("/cart");
-  }, []);
 
   return (
     <AppBarContainer>

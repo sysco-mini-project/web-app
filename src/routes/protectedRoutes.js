@@ -3,6 +3,8 @@ import { Navigate } from "react-router-dom";
 import { CustomLoader } from "../componenets/loader";
 import { UserContext } from "../context/userContext";
 import { ServiceLocator } from "../context/serviceProvider";
+import { AppBarContext } from "../context/appBarConfigProvider";
+import { hideDrawder } from "../shared/utils";
 
 const ProtectedRoute = ({ children }) => {
   const [isAuthenticated, setAuthenticated] = useState(false);
@@ -10,6 +12,8 @@ const ProtectedRoute = ({ children }) => {
   const { currentUser, setCurrentUser } = useContext(UserContext);
 
   const { authService } = useContext(ServiceLocator);
+  const { setAppBarConfigs } = useContext(AppBarContext);
+
 
   useEffect(() => {
     let isMounted = true;
@@ -23,7 +27,7 @@ const ProtectedRoute = ({ children }) => {
             setAuthenticated(true);
             setLoading(false);
             setCurrentUser(user.data);
-            // console.log(user.data)
+            setAppBarConfigs(hideDrawder)
           } else {
             alert("You do not have administration permission");
             setAuthenticated(false);

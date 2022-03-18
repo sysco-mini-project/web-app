@@ -10,9 +10,11 @@ import { AppBarContext } from "../../context/appBarConfigProvider";
 
 import { CustomDrawer } from "../../componenets/drawer";
 import CustomAppBar from "../../componenets/appBar";
+import { UserContext } from "../../context/userContext";
 
 const Layout = ({ children, ...rest }) => {
-  const { appBarConfig } = React.useContext(AppBarContext);
+  // const { appBarConfig } = React.useContext(AppBarContext);
+  // const { currentUser, setCurrentUser } = React.useContext(UserContext);
 
   return (
     <Box sx={{ display: "flex" }}>
