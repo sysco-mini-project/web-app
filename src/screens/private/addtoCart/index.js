@@ -1,5 +1,5 @@
 import { useCallback, useContext, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { AppBarContext } from "../../../context/appBarConfigProvider";
 import { ServiceLocator } from "../../../context/serviceProvider";
 import { useFetch } from "../../../hooks/useFetch";
@@ -68,7 +68,7 @@ const AddToCart = () => {
 
   useEffect(() => {
     setAppBarConfigs((prev) => {
-      return { ...prev, name: "Add to Cart", searchBar: false };
+      return { ...prev, name: "Add to Cart", searchBar: false, cartIcon: true };
     });
   }, []);
 

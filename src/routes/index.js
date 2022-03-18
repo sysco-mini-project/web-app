@@ -12,7 +12,7 @@ import { LoginRequiredPage } from "../screens/public/loginrequired";
 
 const Routers = () => {
   return (
-    <Router>
+    // <Router>
       <Routes>
         <Route exact path="/categories" element={<Category></Category>} />
 
@@ -42,7 +42,7 @@ const Routers = () => {
           }
         />
       </Routes>
-    </Router>
+    // </Router>
   );
 };
 

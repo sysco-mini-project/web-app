@@ -1,19 +1,42 @@
 import * as React from "react";
-import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
-import Divider from "@mui/material/Divider";
 import ListItemText from "@mui/material/ListItemText";
-import ListItemAvatar from "@mui/material/ListItemAvatar";
-import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import { CartItemContainer } from "./styles";
+import { Avatar, ListItemAvatar } from "@mui/material";
 
-const CustomListItem = ({ id, image, title, subTitle, rest, color, onCartListItemClicked }) => {
+const CustomListItem = ({
+  id,
+  image,
+  title,
+  subTitle,
+  rest,
+  color,
+  onCartListItemClicked = (id) => {},
+  width,
+  secondaryAction = <></>
+}) => {
+  
   return (
-    <CartItemContainer key={id} color = {color} onClick = {() => {
-        onCartListItemClicked(id)
-    }}>
-      <ListItem alignItems="flex-start">
+    <CartItemContainer
+      key={id}
+      color={color}
+      width={width}
+      onClick={() => {
+        onCartListItemClicked(id);
+      }}
+    >
+      <ListItem
+        alignItems="flex-start"
+        secondaryAction={secondaryAction}
+      >
+        {image ? (
+          <ListItemAvatar>
+            <Avatar alt="Remy Sharp" src={image} />
+          </ListItemAvatar>
+        ) : (
+          <></>
+        )}
         <ListItemText
           primary={title}
           secondary={
@@ -31,8 +54,6 @@ const CustomListItem = ({ id, image, title, subTitle, rest, color, onCartListIte
           }
         />
       </ListItem>
-
-      <Divider variant="inset" component="li" />
     </CartItemContainer>
   );
 };

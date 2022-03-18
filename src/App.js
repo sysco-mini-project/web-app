@@ -9,8 +9,7 @@ const App = () => {
   const { currentUser, setCurrentUser } = useContext(UserContext);
 
   authService.initializeUiListner((data) => {
-
-    console.log(data)
+    console.log(data);
     authService
       .getCurrentUser()
       .then((res) => {

@@ -9,18 +9,32 @@ export const AppBarContainer = styled.div.attrs((props) => ({}))`
     /* padding-left:'6px'; */
   }
 
-  .tb{
+  .tb {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
   }
 
-  .comp{
+  .comp {
     flex: 1;
   }
 
   .buttonBox {
     margin: 0px 5px 0px 12px;
   }
+
+  .visible-to-logged-user {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+`;
+
+export const ShoppingCartContainer = styled.div`
+  &:hover {
+    cursor: pointer;
+  }
+  margin: 0px 20px;
 `;

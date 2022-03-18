@@ -9,16 +9,20 @@ import {
 import { useCallback, useContext } from "react";
 import { AppBarContext } from "../../context/appBarConfigProvider";
 import { SearchBar } from "../atoms/searchBar";
-import { AppBarContainer } from "./styles";
+import { AppBarContainer, ShoppingCartContainer } from "./styles";
 import { OutLinedButton } from "../atoms/button/outLinedButton";
 import { ServiceLocator } from "../../context/serviceProvider";
 import { UserContext } from "../../context/userContext";
 import { IcnButton } from "../atoms/button/iconButton";
 import { orange, red } from "@mui/material/colors";
+import { ShoppingCart } from "@mui/icons-material";
+import { Link, useNavigate } from "react-router-dom";
 
 const CustomAppBar = (props) => {
   const { appBarConfig } = useContext(AppBarContext);
   const { authService } = useContext(ServiceLocator);
+
+  const navigate = useNavigate();
 
   const { currentUser, setCurrentUser } = useContext(UserContext);
 
@@ -39,6 +43,10 @@ const CustomAppBar = (props) => {
     authService.federatedSignIn();
   }, []);
 
+  const clickCart = useCallback(() => {
+    navigate("/cart");
+  }, []);
+
   return (
     <HideOnScroll {...props}>
       <AppBarContainer>
@@ -52,12 +60,22 @@ const CustomAppBar = (props) => {
 
             <div className="buttonBox">
               {currentUser ? (
-                <Avatar
-                  sx={{ bgcolor: "white", color: orange[500] }}
-                  aria-label="recipe"
-                >
-                  {currentUser.firstName.charAt(0).toUpperCase()}
-                </Avatar>
+                <div className="visible-to-logged-user">
+                  {appBarConfig.cartIcon ? (
+                    <ShoppingCartContainer onClick={clickCart}>
+                      <ShoppingCart />
+                    </ShoppingCartContainer>
+                  ) : (
+                    <></>
+                  )}
+
+                  <Avatar
+                    sx={{ bgcolor: "white", color: orange[500] }}
+                    aria-label="recipe"
+                  >
+                    {currentUser.firstName.charAt(0).toUpperCase()}
+                  </Avatar>
+                </div>
               ) : (
                 <OutLinedButton
                   name="Login"
