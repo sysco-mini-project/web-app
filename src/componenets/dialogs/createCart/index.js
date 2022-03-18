@@ -10,7 +10,7 @@ import { AddShoppingCart } from "@mui/icons-material";
 import { TextField } from "@mui/material";
 import { ServiceLocator } from "../../../context/serviceProvider";
 
-export default function CreateCartDialog() {
+export default function CreateCartDialog({ createCb }) {
   const [open, setOpen] = React.useState(false);
   const [text, setText] = React.useState("");
 
@@ -21,22 +21,27 @@ export default function CreateCartDialog() {
   };
 
   const handleClose = () => {
+    setOpen(false);
+  };
 
-    cartService.createCart({
-        "name" : text
-    }).then(()=> {
-        console.log('Cart created successfully')
+  const handleSuccessClose = () => {
+    if (!text) {
+      return;
+    }
+    cartService
+      .createCart({
+        name: text,
+      })
+      .then(() => {
+        createCb(true);
         setOpen(false);
-    }).catch((e)=>{
-        console.log('error in creating cart')
-        console.log(e)
+      })
+      .catch((e) => {
         setOpen(false);
-    })
-    
+      });
   };
 
   const _handleTextFieldChange = (e) => {
-    console.log(e.target.value);
     setText(e.target.value);
   };
   return (
@@ -66,7 +71,7 @@ export default function CreateCartDialog() {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose}>Create</Button>
+          <Button onClick={handleSuccessClose}>Create</Button>
         </DialogActions>
       </Dialog>
     </div>

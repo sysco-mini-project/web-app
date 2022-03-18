@@ -9,15 +9,13 @@ const useFetch = (func) => {
     (async function () {
       try {
         const response = await func();
-        console.log(response)
         setData(response.data);
         setLoading(true);
-        
-       
+
         // alert('data got')
       } catch (err) {
-        console.log('errrrrrrrrrror ');
-        console.log(err)
+        console.log("errrrrrrrrrror ");
+        console.log(err);
         setError(err);
         // alert('data error')
       } finally {
@@ -26,7 +24,7 @@ const useFetch = (func) => {
     })();
   }, [func]);
 
-  return [data, error, loading];
+  return [data, error, loading, setData];
 };
 
 export { useFetch };

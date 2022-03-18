@@ -6,14 +6,17 @@ const OutLinedButton = ({
   backgroundColor = "white",
   fontWeight = 900,
   disableElevation = true,
-  clickCb
+  clickCb,
+  disabled = false,
 }) => {
   return (
     <Button
       variant="contained"
       size={size}
-      sx={{ color, backgroundColor, fontWeight }} disableElevation={disableElevation}
-      onClick = {clickCb}
+      sx={{ color, backgroundColor, fontWeight }}
+      disableElevation={disableElevation}
+      onClick={clickCb}
+      disabled={disabled}
     >
       {name}
     </Button>

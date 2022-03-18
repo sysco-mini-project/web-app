@@ -10,7 +10,12 @@ const CartService = () => {
     return await post(`${BASE_URL}/api/cart/create`, body, {});
   };
 
-  return { getAllUserCarts, createCart };
+  const addToCart = async (body) => {
+    return await post(`${BASE_URL}/api/cart/add`, body, {});
+  };
+
+
+  return { getAllUserCarts, createCart, addToCart };
 };
 
 export { CartService };

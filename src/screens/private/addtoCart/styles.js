@@ -7,6 +7,7 @@ export const StepperWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin-top: 100px;
 `;
 
 export const StepOneContainer = styled.div`
@@ -69,14 +70,47 @@ export const StepTwoContainer = styled.div`
     align-items: center;
     /* margin: 0px 160px 0px 0px; */
 
-    .create-text{
-        margin-left: 10px;
+    .create-text {
+      margin-left: 10px;
     }
   }
 
-  .your-carts{
-      font-family: sans-serif;
-      font-size: 20px;
+  .your-carts {
+    font-family: sans-serif;
+    font-size: 20px;
   }
 `;
 
+export const CartItemContainer = styled.div`
+  width: 100%;
+  height: 50px;
+  margin-top: 5px;
+  /* background-color: red; */
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+
+  .cartName{
+    font-family: sans-serif;
+    margin-left: 10px;
+  }
+`;
+
+
+export const PostSavedMessageContainer = styled.div`
+  width: 100%;
+  height: 50px;
+  margin-top: 5px;
+  /* background-color: red; */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+
+  .msgText{
+    margin: 20px 0px;
+    font-family: sans-serif;
+    margin-left: 10px;
+  }
+`;
