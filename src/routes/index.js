@@ -19,8 +19,6 @@ const Routers = () => {
 
       <Route exact path="/products/:id" element={<Product></Product>} />
 
-      <Route exact path="/login" element={<Login />} />
-
       <Route exact path="/loginRequired" element={<LoginRequiredPage />} />
 
       <Route

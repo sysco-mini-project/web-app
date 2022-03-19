@@ -1,10 +1,14 @@
-import { DeleteForever, ShoppingCart } from "@mui/icons-material";
+import {
+  DeleteForever,
+  DeleteOutlineOutlined,
+  ShoppingCart,
+} from "@mui/icons-material";
 import { IconButton } from "@mui/material";
 import { useCallback, useContext, useEffect, useRef, useState } from "react";
+import { CustomizedDialogs } from "../../../componenets/dialogs/customDialogBox";
 import { CustomListItem } from "../../../componenets/listItem";
 import { AppBarContext } from "../../../context/appBarConfigProvider";
 import { ServiceLocator } from "../../../context/serviceProvider";
-import { fetchCurrentUser } from "../../../hooks/fetchCurrentuser";
 import { useFetch } from "../../../hooks/useFetch";
 import { MainCartContainer, RightMainContainer } from "./styles";
 
@@ -90,6 +94,35 @@ const Cart = () => {
     );
   };
 
+  const onDeleteSuccess = useCallback(async (id) => {
+    const result = await getCartById(id);
+    setCart(result);
+  }, []);
+
+  const DeleteCartItemAction = ({ cartId, productId }) => {
+    return (
+      <CustomizedDialogs
+        id={cartId}
+        Action={IconButton}
+        Icon={DeleteForever}
+        message="Are you sure you want to delete ?"
+        btnText="Delete"
+        title="Delete Cart Item"
+        onSuccessCb={onDeleteSuccess}
+        fn={async () => {
+          return await cartService
+            .deleteCartItem(cartId, productId)
+            .then((res) => {
+              return res;
+            })
+            .catch((err) => {
+              console.log("error occured in deleting cart item");
+            });
+        }}
+      />
+    );
+  };
+
   const RightContainer = () => {
     return (
       <RightMainContainer>
@@ -121,9 +154,7 @@ const Cart = () => {
               image: item.image,
               width: "500px",
               secondaryAction: (
-                <IconButton>
-                  <DeleteForever />
-                </IconButton>
+                <DeleteCartItemAction cartId={cart.id} productId={item.id} />
               ),
             });
           })

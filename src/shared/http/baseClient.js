@@ -2,7 +2,6 @@ import axios from "axios";
 import { AuthService } from "../../service/authService";
 
 const reqHandler = async (request) => {
-  console.log('call to refresh')
   const accessToken = await AuthService().getAccessToken();
 
   request.headers.authorization = "Bearer " + accessToken;

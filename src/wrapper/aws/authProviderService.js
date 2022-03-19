@@ -48,7 +48,6 @@ function AuthProvider() {
     let session = await Auth.currentSession();
 
     if (!session.isValid()) {
-      console.log(" Session is invalid -------------------------");
       const cognitoUser = await Auth.currentAuthenticatedUser();
       const currentSession = await Auth.currentSession();
 

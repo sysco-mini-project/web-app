@@ -1,5 +1,5 @@
 import { BASE_URL } from "../shared/Constants";
-import { get, post } from "../shared/http/httpClient";
+import { del, get, post } from "../shared/http/httpClient";
 
 const CartService = () => {
   const getAllUserCarts = async () => {
@@ -18,8 +18,21 @@ const CartService = () => {
     return await get(`${BASE_URL}/api/cart/view/${id}`, {});
   };
 
+  const deleteCartItem = async (cartId, productId) => {
+    return await del(
+      `${BASE_URL}/api/cart/remove/${cartId}/${productId}`,
+      {},
+      {}
+    );
+  };
 
-  return { getAllUserCarts, createCart, addToCart, getCartByid };
+  return {
+    getAllUserCarts,
+    createCart,
+    addToCart,
+    getCartByid,
+    deleteCartItem,
+  };
 };
 
 export { CartService };
