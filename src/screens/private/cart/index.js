@@ -4,6 +4,7 @@ import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { CustomListItem } from "../../../componenets/listItem";
 import { AppBarContext } from "../../../context/appBarConfigProvider";
 import { ServiceLocator } from "../../../context/serviceProvider";
+import { fetchCurrentUser } from "../../../hooks/fetchCurrentuser";
 import { useFetch } from "../../../hooks/useFetch";
 import { MainCartContainer, RightMainContainer } from "./styles";
 

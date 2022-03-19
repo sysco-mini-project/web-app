@@ -4,8 +4,9 @@ import { ProductCard } from "../../../componenets/productCard";
 import { AppBarContext } from "../../../context/appBarConfigProvider";
 import { SearchValueContext } from "../../../context/SearchValueProvider";
 import { ServiceLocator } from "../../../context/serviceProvider";
+import { UserContext } from "../../../context/userContext";
 import { useFetch } from "../../../hooks/useFetch";
-import { ProductContainer, ProductMainWrapper, Row, StickDiv } from "./styles";
+import { ProductMainWrapper, Row } from "./styles";
 
 const Product = () => {
   let params = useParams();
@@ -15,6 +16,8 @@ const Product = () => {
   const { productService } = useContext(ServiceLocator);
   const { setAppBarConfigs } = useContext(AppBarContext);
   const { searchValue } = useContext(SearchValueContext);
+  const { currentUser, setCurrentUser } = useContext(UserContext);
+  const { authService } = useContext(ServiceLocator);
 
   const fetchData = useCallback(
     async () => await productService.getAllProductsByCategory(params.id),
@@ -23,10 +26,27 @@ const Product = () => {
 
   const [products, error, loading, setData, setLoading] = useFetch(fetchData);
 
+  const checkUser = async () => {
+    if (currentUser) return;
+    authService
+      .getCurrentUser()
+      .then((res) => {
+        setCurrentUser(res.data);
+        setAppBarConfigs((prev) => {
+          return { ...prev, drawerWidth: 240 };
+        });
+      })
+      .catch((err) => {
+        console.log("error occurred in getting current user");
+        console.log(err);
+      });
+  };
+
   useEffect(() => {
     setAppBarConfigs((prev) => {
       return { ...prev, name: "Products -> ", searchBar: true, cartIcon: true };
     });
+    checkUser();
   }, []);
 
   //Listerner to the search value

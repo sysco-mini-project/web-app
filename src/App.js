@@ -7,7 +7,7 @@ import { AppBarContext } from "./context/appBarConfigProvider";
 
 const App = () => {
   const { authService } = useContext(ServiceLocator);
-  const { currentUser, setCurrentUser } = useContext(UserContext);
+  const { setCurrentUser } = useContext(UserContext);
   const { setAppBarConfigs } = useContext(AppBarContext);
 
   authService.initializeUiListner((data) => {
