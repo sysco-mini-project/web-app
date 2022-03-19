@@ -17,9 +17,12 @@ import { useNavigate } from "react-router-dom";
 import { ProfileContainer } from "./styles";
 import { UserContext } from "../../context/userContext";
 import { orange } from "@mui/material/colors";
+import { ServiceLocator } from "../../context/serviceProvider";
 
 const CustomDrawer = () => {
   const navigate = useNavigate();
+
+  const { authService } = useContext(ServiceLocator);
   const { currentUser, setCurrentUser } = useContext(UserContext);
 
   const navigateCb = (path) => () => {
@@ -42,7 +45,9 @@ const CustomDrawer = () => {
     {
       Icon: LogoutSharp,
       name: "Logout",
-      navigation: () => {},
+      navigation: async() => {
+        await authService.signOut()
+      },
     },
   ];
 

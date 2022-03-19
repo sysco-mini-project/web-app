@@ -44,7 +44,7 @@ const Category = () => {
 
   useEffect(() => {
     setAppBarConfigs((prev) => {
-      return { ...prev, name: "Categories" };
+      return { ...prev, name: "Categories",searchBar  : false };
     });
     checkUser();
   }, []);

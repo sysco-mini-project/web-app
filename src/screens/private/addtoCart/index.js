@@ -53,7 +53,6 @@ const AddToCart = () => {
       const carts = await getUserCarts();
 
       const result = { data: { product: product.data, carts: carts.data } };
-      console.log(result);
       return result;
     }, [])
   );

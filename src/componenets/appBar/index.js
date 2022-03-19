@@ -1,4 +1,4 @@
-import { AppBar, Avatar, Toolbar, Typography } from "@mui/material";
+import { AppBar, Avatar, IconButton, Toolbar, Typography } from "@mui/material";
 import { useCallback, useContext } from "react";
 import { AppBarContext } from "../../context/appBarConfigProvider";
 import { SearchBar } from "../atoms/searchBar";
@@ -9,6 +9,8 @@ import { UserContext } from "../../context/userContext";
 import { orange } from "@mui/material/colors";
 import { useNavigate } from "react-router-dom";
 import { SearchValueContext } from "../../context/SearchValueProvider";
+import { IcnButton } from "../atoms/button/iconButton";
+import { ArrowCircleLeft } from "@mui/icons-material";
 
 const CustomAppBar = (props) => {
   const { appBarConfig } = useContext(AppBarContext);
@@ -17,9 +19,7 @@ const CustomAppBar = (props) => {
   const navigate = useNavigate();
 
   const { currentUser, setCurrentUser } = useContext(UserContext);
-  
 
-  
   const signInCb = useCallback(() => {
     authService.federatedSignIn();
   }, []);
@@ -34,6 +34,14 @@ const CustomAppBar = (props) => {
         }}
       >
         <Toolbar className="tb">
+          <IcnButton
+            icon={ArrowCircleLeft}
+            size="medium"
+            backgroundColor="#1976d2"
+            color="white"
+            cb={() => navigate(-1)}
+          />
+
           <Typography variant="h6" noWrap component="div" className="comp">
             {appBarConfig.name ?? "App bar"}
           </Typography>
