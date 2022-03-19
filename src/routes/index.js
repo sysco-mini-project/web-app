@@ -12,37 +12,35 @@ import { LoginRequiredPage } from "../screens/public/loginrequired";
 
 const Routers = () => {
   return (
-    <Router>
-      <Routes>
-        <Route exact path="/categories" element={<Category></Category>} />
+    <Routes>
+      <Route index exact path="/" element={<Category></Category>} />
 
-        <Route exact path="/products/:id" element={<Product></Product>} />
+      <Route index exact path="/categories" element={<Category></Category>} />
 
-        <Route exact path="/login" element={<Login />} />
+      <Route exact path="/products/:id" element={<Product></Product>} />
 
-        <Route exact path="/loginRequired" element={<LoginRequiredPage />} />
+      <Route exact path="/loginRequired" element={<LoginRequiredPage />} />
 
-        <Route
-          exact
-          path="/cart"
-          element={
-            <ProtectedRoute>
-              <Cart />
-            </ProtectedRoute>
-          }
-        />
+      <Route
+        exact
+        path="/cart"
+        element={
+          <ProtectedRoute>
+            <Cart />
+          </ProtectedRoute>
+        }
+      />
 
-        <Route
-          exact
-          path="/addToCart/:id"
-          element={
-            <ProtectedRoute>
-              <AddToCart />
-            </ProtectedRoute>
-          }
-        />
-      </Routes>
-    </Router>
+      <Route
+        exact
+        path="/addToCart/:id"
+        element={
+          <ProtectedRoute>
+            <AddToCart />
+          </ProtectedRoute>
+        }
+      />
+    </Routes>
   );
 };
 

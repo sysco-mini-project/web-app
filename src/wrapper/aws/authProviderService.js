@@ -2,9 +2,12 @@ import Amplify, { Auth, Hub, API } from "aws-amplify";
 import awsAuth from "../../awsauth";
 import awsExports from "../../aws-exports";
 
-const AuthProvider = () => {
-  Amplify.configure(awsExports);
-  Auth.configure({ oauth: awsAuth });
+Amplify.configure(awsExports);
+Auth.configure({ oauth: awsAuth });
+
+
+
+function AuthProvider() {
 
   const initializeUiListner = (cb) => {
     Hub.listen("auth", ({ payload: { event, data } }) => {
@@ -14,9 +17,7 @@ const AuthProvider = () => {
           console.log("data received");
           // console.log('sign in', event, data)
           // this.setState({ user: data})
-
           // console.log(data.signInUserSession.idToken.jwtToken);
-
           cb({
             idToken: data.signInUserSession.idToken.jwtToken,
           });
@@ -42,7 +43,22 @@ const AuthProvider = () => {
   };
 
   const getAccessToken = async () => {
-    const session = await Auth.currentSession();
+
+
+    let session = await Auth.currentSession();
+
+    if (!session.isValid()) {
+      const cognitoUser = await Auth.currentAuthenticatedUser();
+      const currentSession = await Auth.currentSession();
+
+      await cognitoUser.refreshSession(currentSession.refreshToken);
+      session = await Auth.currentSession();
+    } else {
+      console.log(" Session is valie -------------------------");
+    }
+
+    session = await Auth.currentSession();
+
     return session.getIdToken().getJwtToken();
   };
 
@@ -51,6 +67,6 @@ const AuthProvider = () => {
   };
 
   return { initializeUiListner, federatedSignIn, getAccessToken, logout };
-};
+}
 
 export { AuthProvider };

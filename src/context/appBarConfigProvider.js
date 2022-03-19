@@ -9,6 +9,7 @@ export const AppBarConfigProvider = ({ children }) => {
     name: "",
     searchBar: false,
     cartIcon: false,
+    drawerWidth: 0
   });
 
   return (

@@ -5,21 +5,21 @@ import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import { Search } from "./style";
 import { Cancel } from "@mui/icons-material";
+import { SearchValueContext } from "../../../context/SearchValueProvider";
 
 const SearchBar = () => {
   const [focused, setFoucused] = React.useState(false);
-  // const [radius, setRadius] = React.useState("50%");
+  const { setSearchValue } = React.useContext(SearchValueContext);
+
   return (
     <Search>
       <Paper
         className="searchBox"
-        component="form"
         sx={{
-          p: "2px 2px",
           display: "flex",
           alignItems: "center",
           borderRadius: focused ? "1%" : "50%",
-          width: focused ? 400 : 40,
+          width: focused ? 400 : 0,
           backgroundColor: focused ? "white" : "transparent",
         }}
       >
@@ -29,11 +29,18 @@ const SearchBar = () => {
             flex: 1,
             backgroundColor: "transparent",
             paddingLeft: focused ? "40px" : "0px",
-            disableUnderline:true
+            disableUnderline: true,
           }}
           placeholder="Search product"
-          inputProps={{ "aria-label": "Search product", }}
-          
+          inputProps={{ "aria-label": "Search product" }}
+          onChange={(event) => {
+            if (event?.target?.value != null) {
+              let setStateTimeout = setTimeout(()=> {
+                setSearchValue({text : event?.target?.value, btnState : true});
+                clearTimeout(setStateTimeout)
+              }, 500)
+            }
+          }}
         />
         <IconButton
           sx={{
@@ -43,6 +50,7 @@ const SearchBar = () => {
           }}
           aria-label="search"
           onClick={() => {
+            setSearchValue({text : '', btnState : !focused});
             setFoucused((pre) => !pre);
           }}
         >

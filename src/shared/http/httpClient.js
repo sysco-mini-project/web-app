@@ -16,4 +16,9 @@ const get = async (url, { headers = defaultHeaders, intecept = true }) => {
   return response;
 };
 
-export { post, get };
+const del = async (url, body = {}, headers = defaultHeaders, intecept = true) => {
+  const response = await client(intecept).delete(url, body, { headers });
+  return response;
+};
+
+export { post, get, del };
