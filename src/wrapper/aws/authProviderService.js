@@ -7,7 +7,7 @@ Auth.configure({ oauth: awsAuth });
 
 
 
-const AuthProvider = () => {
+function AuthProvider() {
 
   const initializeUiListner = (cb) => {
     Hub.listen("auth", ({ payload: { event, data } }) => {
@@ -17,9 +17,7 @@ const AuthProvider = () => {
           console.log("data received");
           // console.log('sign in', event, data)
           // this.setState({ user: data})
-
           // console.log(data.signInUserSession.idToken.jwtToken);
-
           cb({
             idToken: data.signInUserSession.idToken.jwtToken,
           });
@@ -46,7 +44,7 @@ const AuthProvider = () => {
 
   const getAccessToken = async () => {
 
-    
+
     let session = await Auth.currentSession();
 
     if (!session.isValid()) {
@@ -70,6 +68,6 @@ const AuthProvider = () => {
   };
 
   return { initializeUiListner, federatedSignIn, getAccessToken, logout };
-};
+}
 
 export { AuthProvider };

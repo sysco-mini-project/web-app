@@ -9,8 +9,8 @@ import { SearchValueContext } from "../../../context/SearchValueProvider";
 
 const SearchBar = () => {
   const [focused, setFoucused] = React.useState(false);
-  const {  setSearchValue,} = React.useContext(SearchValueContext);
-  
+  const { setSearchValue } = React.useContext(SearchValueContext);
+
   return (
     <Search>
       <Paper
@@ -32,7 +32,15 @@ const SearchBar = () => {
             disableUnderline: true,
           }}
           placeholder="Search product"
-          inputProps={{ "aria-label": "Search product" }} 
+          inputProps={{ "aria-label": "Search product" }}
+          onChange={(event) => {
+            if (event?.target?.value != null) {
+              let setStateTimeout = setTimeout(()=> {
+                setSearchValue({text : event?.target?.value, btnState : true});
+                clearTimeout(setStateTimeout)
+              }, 500)
+            }
+          }}
         />
         <IconButton
           sx={{
@@ -42,6 +50,7 @@ const SearchBar = () => {
           }}
           aria-label="search"
           onClick={() => {
+            setSearchValue({text : '', btnState : !focused});
             setFoucused((pre) => !pre);
           }}
         >

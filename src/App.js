@@ -3,10 +3,12 @@ import { useContext, useEffect } from "react";
 import { UserContext } from "./context/userContext";
 import { Home } from "./screens/home";
 import { ServiceLocator } from "./context/serviceProvider";
+import { AppBarContext } from "./context/appBarConfigProvider";
 
 const App = () => {
   const { authService } = useContext(ServiceLocator);
   const { currentUser, setCurrentUser } = useContext(UserContext);
+  const { setAppBarConfigs } = useContext(AppBarContext);
 
   authService.initializeUiListner((data) => {
     console.log(data);
@@ -14,6 +16,9 @@ const App = () => {
       .getCurrentUser()
       .then((res) => {
         setCurrentUser(res.data);
+        setAppBarConfigs((prev) => {
+          return { ...prev, searchBar: false, drawerWidth: 240 };
+        });
       })
       .catch((err) => {
         console.log("error occurred in getting current user");
@@ -21,27 +26,7 @@ const App = () => {
       });
   });
 
-  return (
-    <Home></Home>
-
-    // <div className="App">
-    //   <div className="App-header">
-    //     <img src={logo} className="App-logo" alt="logo" />
-    //     <h2>Welcome to {currentUser?.firstName ?? "React"}</h2>
-    //     <button
-    //       onClick={() => {
-    //         authService.federatedSignIn();
-    //       }}
-    //     >
-    //       {" "}
-    //       Signin
-    //     </button>
-    //   </div>
-    //   <p className="App-intro">
-    //     To get started, edit <code>src/App.js</code> and save to reload.
-    //   </p>
-    // </div>
-  );
+  return <Home></Home>;
 };
 
 export default App;

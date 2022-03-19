@@ -1,11 +1,8 @@
-import { useContext, useEffect } from "react";
-import { AppBarContext } from "../../context/appBarConfigProvider";
-import { ServiceLocator } from "../../context/serviceProvider";
+import { useEffect } from "react";
 import Routers from "../../routes";
 import Layout from "../layout";
 
 const Home = () => {
-
   useEffect(() => {}, []);
 
   return (
