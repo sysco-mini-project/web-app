@@ -8,7 +8,7 @@ const awsAuth = {
       "aws.cognito.signin.user.admin"
     ],
     "redirectSignIn": "http://localhost:3000",
-    "redirectSignOut": "http://localhost:3000/signout",
+    "redirectSignOut": "http://localhost:3000/categories",
     "responseType": "token"
   }
 
