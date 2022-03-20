@@ -26,12 +26,17 @@ const CartService = () => {
     );
   };
 
+  const deleteCart = async (cartId) => {
+    return await del(`${BASE_URL}/api/cart/remove/${cartId}`, {}, {});
+  };
+
   return {
     getAllUserCarts,
     createCart,
     addToCart,
     getCartByid,
     deleteCartItem,
+    deleteCart,
   };
 };
 

@@ -80,11 +80,7 @@ const Cart = () => {
           rest,
           color: cartId === item.id ? "orange" : "transparent",
           onCartListItemClicked,
-          secondaryAction: (
-            <IconButton>
-              <DeleteForever />
-            </IconButton>
-          ),
+          secondaryAction: <DeleteCartAction cartId={item.id} />,
         });
       })
     ) : loading ? (
@@ -94,10 +90,40 @@ const Cart = () => {
     );
   };
 
-  const onDeleteSuccess = useCallback(async (id) => {
+  const onDeleteCartItemSuccess = useCallback(async (id) => {
     const result = await getCartById(id);
     setCart(result);
   }, []);
+
+  const onDeleteCart = useCallback(async (id) => {
+    const carts = await getUserCarts();
+    setData(carts);
+    setCart(null);
+  }, []);
+
+  const DeleteCartAction = ({ cartId }) => {
+    return (
+      <CustomizedDialogs
+        id={cartId}
+        Action={IconButton}
+        Icon={DeleteForever}
+        message="Are you sure you want to delete ?"
+        btnText="Delete"
+        title="Delete Item"
+        onSuccessCb={onDeleteCart}
+        fn={async () => {
+          return await cartService
+            .deleteCart(cartId)
+            .then((res) => {
+              return res;
+            })
+            .catch((err) => {
+              console.log("error occured in deleting cart");
+            });
+        }}
+      />
+    );
+  };
 
   const DeleteCartItemAction = ({ cartId, productId }) => {
     return (
@@ -108,7 +134,7 @@ const Cart = () => {
         message="Are you sure you want to delete ?"
         btnText="Delete"
         title="Delete Cart Item"
-        onSuccessCb={onDeleteSuccess}
+        onSuccessCb={onDeleteCartItemSuccess}
         fn={async () => {
           return await cartService
             .deleteCartItem(cartId, productId)

@@ -81,7 +81,6 @@ const CustomDrawer = () => {
       </ProfileContainer>
 
       <Divider />
-      <Drawer />
       <List>
         {navigations.map((item, index) => {
           const { Icon } = item;
