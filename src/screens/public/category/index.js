@@ -60,7 +60,7 @@ const Category = () => {
 
       <ParallaxContainer></ParallaxContainer>
 
-      <CategoryText>Out Categories</CategoryText>
+      <CategoryText>Our Categories</CategoryText>
 
       <Row>
         {loading? (
