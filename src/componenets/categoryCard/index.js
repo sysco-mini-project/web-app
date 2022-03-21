@@ -3,6 +3,7 @@ import { IcnButton } from "../atoms/button/iconButton";
 import ItemCard from "../atoms/cards/card";
 import { BaseCard } from "./styles";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
+import { AddShoppingCart } from "@mui/icons-material";
 
 const CategoryCard = ({ id, header: head, image: img, cb }) => {
   const [show, setShow] = useState(false);
@@ -23,8 +24,11 @@ const CategoryCard = ({ id, header: head, image: img, cb }) => {
           <IcnButton
             id="category-id"
             label="view"
-            icon={ShoppingBagIcon}
+            icon={AddShoppingCart}
             cb={cb}
+            size="large"
+            backgroundColor="orange"
+            color="white"
           ></IcnButton>
         </div>
       ) : (

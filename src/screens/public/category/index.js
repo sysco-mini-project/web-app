@@ -12,6 +12,7 @@ import {
 } from "./styles";
 import { AppBarContext } from "../../../context/appBarConfigProvider";
 import { UserContext } from "../../../context/userContext";
+import { LinearProgress } from "@mui/material";
 
 const Category = () => {
   let navigate = useNavigate();
@@ -62,20 +63,24 @@ const Category = () => {
       <CategoryText>Out Categories</CategoryText>
 
       <Row>
-        {(categories ?? []).map((category) => {
-          const constr = constructCardItem(category);
+        {loading? (
+          <LinearProgress />
+        ) : (
+          (categories ?? []).map((category) => {
+            const constr = constructCardItem(category);
 
-          return (
-            <CategoryCard
-              key={category.id}
-              header={constr.header}
-              image={constr.image}
-              cb={() => {
-                navigate(`/products/${category.id}`);
-              }}
-            />
-          );
-        })}
+            return (
+              <CategoryCard
+                key={category.id}
+                header={constr.header}
+                image={constr.image}
+                cb={() => {
+                  navigate(`/products/${category.id}`);
+                }}
+              />
+            );
+          })
+        )}
       </Row>
     </CategoryMainContainer>
   );

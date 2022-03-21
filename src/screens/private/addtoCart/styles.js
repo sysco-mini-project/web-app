@@ -23,12 +23,10 @@ export const StepOneContainer = styled.div`
 export const BaseCard = styled.div`
   width: 400px;
   height: 700px;
-  /* margin: 40px 8px 30px 8px; */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-self: center;
-  /* background-color: green; */
 `;
 
 export const Quantity = styled.div`

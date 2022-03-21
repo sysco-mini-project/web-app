@@ -1,3 +1,4 @@
+import { LinearProgress } from "@mui/material";
 import { useCallback, useContext, useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ProductCard } from "../../../componenets/productCard";
@@ -93,14 +94,21 @@ const Product = () => {
   return (
     <ProductMainWrapper>
       <Row>
-        {(products ?? []).map((item) => {
-          return ProductCard({
-            item,
-            height: "320px",
-            width: "300px",
-            clickCb,
-          });
-        })}
+        {(products ?? []).length === 0 ? (
+          <h2>No products available....</h2>
+        ) : (products ?? []).length > 0 ? (
+          (products ?? []).map((item) => {
+            return ProductCard({
+              item,
+              height: "320px",
+              width: "300px",
+              clickCb,
+            });
+          })
+        ) : (
+          <LinearProgress />
+        )}
+        {}
       </Row>
     </ProductMainWrapper>
   );
