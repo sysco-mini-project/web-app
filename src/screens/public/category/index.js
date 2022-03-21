@@ -4,7 +4,6 @@ import { ServiceLocator } from "../../../context/serviceProvider";
 import { useFetch } from "../../../hooks/useFetch";
 import { useNavigate } from "react-router-dom";
 import {
-  CategoryContainer,
   CategoryMainContainer,
   CategoryText,
   ParallaxContainer,
@@ -13,6 +12,7 @@ import {
 } from "./styles";
 import { AppBarContext } from "../../../context/appBarConfigProvider";
 import { UserContext } from "../../../context/userContext";
+import { LinearProgress } from "@mui/material";
 
 const Category = () => {
   let navigate = useNavigate();
@@ -32,9 +32,6 @@ const Category = () => {
       .getCurrentUser()
       .then((res) => {
         setCurrentUser(res.data);
-        setAppBarConfigs((prev) => {
-          return { ...prev, drawerWidth: 240 };
-        });
       })
       .catch((err) => {
         console.log("error occurred in getting current user");
@@ -44,7 +41,7 @@ const Category = () => {
 
   useEffect(() => {
     setAppBarConfigs((prev) => {
-      return { ...prev, name: "Categories",searchBar  : false };
+      return { ...prev, name: "Categories", searchBar: false };
     });
     checkUser();
   }, []);
@@ -63,23 +60,27 @@ const Category = () => {
 
       <ParallaxContainer></ParallaxContainer>
 
-      <CategoryText>Out Categories</CategoryText>
+      <CategoryText>Our Categories</CategoryText>
 
       <Row>
-        {(categories ?? []).map((category) => {
-          const constr = constructCardItem(category);
+        {loading? (
+          <LinearProgress />
+        ) : (
+          (categories ?? []).map((category) => {
+            const constr = constructCardItem(category);
 
-          return (
-            <CategoryCard
-              key={category.id}
-              header={constr.header}
-              image={constr.image}
-              cb={() => {
-                navigate(`/products/${category.id}`);
-              }}
-            />
-          );
-        })}
+            return (
+              <CategoryCard
+                key={category.id}
+                header={constr.header}
+                image={constr.image}
+                cb={() => {
+                  navigate(`/products/${category.id}`);
+                }}
+              />
+            );
+          })
+        )}
       </Row>
     </CategoryMainContainer>
   );

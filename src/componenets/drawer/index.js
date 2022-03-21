@@ -8,7 +8,7 @@ import {
   ListItemText,
   Avatar,
 } from "@mui/material";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import { AppBarContext } from "../../context/appBarConfigProvider";
 
@@ -24,10 +24,17 @@ const CustomDrawer = () => {
 
   const { authService } = useContext(ServiceLocator);
   const { currentUser, setCurrentUser } = useContext(UserContext);
+  const [drawerWidth, setDrawerWidth] = useState(0);
 
   const navigateCb = (path) => () => {
     navigate(path);
   };
+
+  useEffect(() => {
+    if (currentUser?.id) {
+      setDrawerWidth(240);
+    }
+  }, [currentUser]);
 
   const navigations = [
     {
@@ -45,27 +52,27 @@ const CustomDrawer = () => {
     {
       Icon: LogoutSharp,
       name: "Logout",
-      navigation: async() => {
-        await authService.signOut()
+      navigation: async () => {
+        await authService.signOut();
       },
     },
   ];
 
-  const { appBarConfig } = useContext(AppBarContext);
+
   return (
     <Drawer
       sx={{
-        width: appBarConfig.drawerWidth,
+        width: drawerWidth,
         flexShrink: 0,
         "& .MuiDrawer-paper": {
-          width: appBarConfig.drawerWidth,
+          width: drawerWidth,
           boxSizing: "border-box",
         },
       }}
       variant="permanent"
       anchor="left"
     >
-      <Toolbar />
+      <Toolbar sx={{ backgroundColor: "orange", borderColor: "orange" }} />
 
       <ProfileContainer>
         <Avatar
@@ -81,7 +88,6 @@ const CustomDrawer = () => {
       </ProfileContainer>
 
       <Divider />
-      <Drawer />
       <List>
         {navigations.map((item, index) => {
           const { Icon } = item;

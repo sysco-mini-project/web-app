@@ -24,7 +24,7 @@ export const AppBarContainer = styled.div.attrs((props) => ({}))`
   }
 
   .search-box {
-    padding-right: 25px;
+    padding-right: 65px;
   }
 `;
 

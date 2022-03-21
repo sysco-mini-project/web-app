@@ -39,7 +39,7 @@ const ItemCard = ({
   };
 
   const Header = () => {
-    let component = <CardHeader />;
+    let component = <CardHeader/>;
 
     if (header.avatar) {
       component = React.cloneElement(component, { avatar: header.avatar });

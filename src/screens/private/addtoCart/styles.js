@@ -17,12 +17,12 @@ export const StepOneContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  /* background-color: green */
 `;
 
 export const BaseCard = styled.div`
-  width: 345px;
-  height: 500px;
-  /* margin: 40px 8px 30px 8px; */
+  width: 400px;
+  height: 700px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -33,22 +33,134 @@ export const Quantity = styled.div`
   font-family: sans-serif;
   font-size: 15px;
   color: black;
-  margin-top: 20px;
+  margin-top: 0px;
+  background-color: gray;
+  display: flex;
+  flex-direction: row;
+  height: 100px;
 
-  .button-container {
-    margin-top: 20px;
+  .left {
+    flex: 1;
+    /* background-color: pink; */
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .name {
+      padding-top: 5px;
+      padding-bottom: 5px;
+      font-family: sans-serif;
+      color: white;
+      font-weight: 600;
+    }
+
+    .quantities {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: row;
+      color: black;
+      font-weight: 600;
+      justify-content: space-evenly;
+      align-items: center;
+
+      /* background-color: red; */
+    }
+  }
+
+  .right {
+    flex: 1;
+    /* background-color: yellow; */
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-left: 1px solid;
+
+    .name {
+      padding-top: 5px;
+      padding-bottom: 5px;
+      font-family: sans-serif;
+      color: white;
+      font-weight: 600;
+    }
+
+    .price {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: row;
+      color: black;
+      font-weight: 600;
+      justify-content: space-evenly;
+      align-items: center;
+
+      /* background-color: red; */
+    }
+  }
+`;
+
+export const BottomCard = styled.div`
+  width: 100%;
+  height: 100px;
+  /* background-color: green; */
+  display: flex;
+  flex-direction: row;
+  background-color: gray;
+
+  .left {
+    flex: 1;
+    /* background-color: pink; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-right: 1px solid;
+  }
+
+  .right {
+    flex: 1;
+    /* background-color: purple; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+`;
+
+export const StepThreeContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  /* background-color: red; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  .main-container {
+    width: 60%;
+    height: 95%;
+  }
+
+  .cart-contaier {
+    margin-top: 5px;
+    height: 100px;
+    width: 100%;
+    background-color: gray;
     display: flex;
     flex-direction: row;
+    justify-content: center;
     align-items: center;
-    justify-content: space-around;
-  }
-
-  .total-container {
     font-family: sans-serif;
-    font-size: 15px;
-    color: black;
-    margin-top: 20px;
+    font-weight: 600;
   }
+`;
+export const BottomDetails = styled.div`
+  height: 100px;
+  width: 100%;
+  background-color: yellow;
 `;
 
 export const StepTwoContainer = styled.div`
@@ -56,13 +168,13 @@ export const StepTwoContainer = styled.div`
   height: 100% !important;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
 
   .add-cart-btn-container {
     width: 100%;
     height: 50px;
-    margin-top: 20px;
+    /* margin-top: 20px; */
     /* background-color: red; */
     display: flex;
     flex-direction: row;
@@ -116,7 +228,7 @@ export const PostSavedMessageContainer = styled.div`
 
 export const StepContainer = styled.div`
   width: 100%;
-  height: 600px;
+  height: 800px;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -127,11 +239,11 @@ export const StepContainer = styled.div`
   .back-btn-container {
     display: flex;
     flex: 1;
-    /* background-color: red; */
+    /* background-color: red;  */
     flex-direction: column;
     align-items: flex-end;
     justify-content: center;
-    height: 100%; 
+    height: 100%;
   }
 
   .step-container {
@@ -139,7 +251,8 @@ export const StepContainer = styled.div`
     flex-direction: column;
     align-items: center;
     flex: 2;
-    /* background-color: green; */
+    background-color: #f2f7f4;
+    height: 100%;
   }
 
   .next-btn-container {

@@ -22,7 +22,6 @@ const Login = () => {
         sign in
       </button>
 
-
       <button
         onClick={() => {
           authService.signOut();
