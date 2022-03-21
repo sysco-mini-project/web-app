@@ -4,7 +4,6 @@ import { ServiceLocator } from "../../../context/serviceProvider";
 import { useFetch } from "../../../hooks/useFetch";
 import { useNavigate } from "react-router-dom";
 import {
-  CategoryContainer,
   CategoryMainContainer,
   CategoryText,
   ParallaxContainer,
@@ -32,9 +31,6 @@ const Category = () => {
       .getCurrentUser()
       .then((res) => {
         setCurrentUser(res.data);
-        setAppBarConfigs((prev) => {
-          return { ...prev, drawerWidth: 240 };
-        });
       })
       .catch((err) => {
         console.log("error occurred in getting current user");
@@ -44,7 +40,7 @@ const Category = () => {
 
   useEffect(() => {
     setAppBarConfigs((prev) => {
-      return { ...prev, name: "Categories",searchBar  : false };
+      return { ...prev, name: "Categories", searchBar: false };
     });
     checkUser();
   }, []);

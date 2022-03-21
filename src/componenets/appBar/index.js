@@ -1,5 +1,5 @@
 import { AppBar, Avatar, IconButton, Toolbar, Typography } from "@mui/material";
-import { useCallback, useContext } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { AppBarContext } from "../../context/appBarConfigProvider";
 import { SearchBar } from "../atoms/searchBar";
 import { AppBarContainer } from "./styles";
@@ -15,23 +15,30 @@ import { ArrowCircleLeft } from "@mui/icons-material";
 const CustomAppBar = (props) => {
   const { appBarConfig } = useContext(AppBarContext);
   const { authService } = useContext(ServiceLocator);
+  const [drawerWidth, setDrawerWidth] = useState(0);
+  const { currentUser, setCurrentUser } = useContext(UserContext);
 
   const navigate = useNavigate();
-
-  const { currentUser, setCurrentUser } = useContext(UserContext);
 
   const signInCb = useCallback(() => {
     authService.federatedSignIn();
   }, []);
+
+  //display drawer
+  useEffect(() => {
+    if (currentUser?.id) {
+      setDrawerWidth(240);
+    }
+  }, [currentUser]);
 
   return (
     <AppBarContainer>
       <AppBar
         position="fixed"
         sx={{
-          width: `calc(100% - ${appBarConfig.drawerWidth}px)`,
-          ml: `${appBarConfig.drawerWidth}px`,
-          backgroundColor: "orange"
+          width: `calc(100% - ${drawerWidth}px)`,
+          ml: `${drawerWidth}px`,
+          backgroundColor: "orange",
         }}
       >
         <Toolbar className="tb">

@@ -1,9 +1,8 @@
 import {
   DeleteForever,
-  DeleteOutlineOutlined,
   ShoppingCart,
 } from "@mui/icons-material";
-import { Button, IconButton } from "@mui/material";
+import { IconButton } from "@mui/material";
 import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { IcnButton } from "../../../componenets/atoms/button/iconButton";
 import { CustomizedDialogs } from "../../../componenets/dialogs/customDialogBox";

@@ -44,7 +44,7 @@ const Product = () => {
 
   useEffect(() => {
     setAppBarConfigs((prev) => {
-      return { ...prev, name: "Products", searchBar: true, cartIcon: true };
+      return { ...prev, name: "Products", searchBar: true };
     });
     checkUser();
   }, []);

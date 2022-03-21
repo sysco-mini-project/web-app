@@ -70,7 +70,7 @@ const AddToCart = () => {
 
   useEffect(() => {
     setAppBarConfigs((prev) => {
-      return { ...prev, name: "Add to Cart", searchBar: false, cartIcon: true };
+      return { ...prev, name: "Add to Cart", searchBar: false };
     });
   }, []);
 
