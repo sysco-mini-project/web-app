@@ -5,6 +5,6 @@ export const ProfileContainer = styled("div")`
   height: 150px;
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: center;
   align-items: center;
 `;

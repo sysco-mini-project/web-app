@@ -65,7 +65,7 @@ const CustomDrawer = () => {
       variant="permanent"
       anchor="left"
     >
-      <Toolbar />
+      <Toolbar sx={{backgroundColor: "orange", borderColor: "orange"}}/>
 
       <ProfileContainer>
         <Avatar

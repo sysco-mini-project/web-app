@@ -3,11 +3,13 @@ import {
   DeleteOutlineOutlined,
   ShoppingCart,
 } from "@mui/icons-material";
-import { IconButton } from "@mui/material";
+import { Button, IconButton } from "@mui/material";
 import { useCallback, useContext, useEffect, useRef, useState } from "react";
+import { IcnButton } from "../../../componenets/atoms/button/iconButton";
 import { CustomizedDialogs } from "../../../componenets/dialogs/customDialogBox";
 import { CustomListItem } from "../../../componenets/listItem";
 import { AppBarContext } from "../../../context/appBarConfigProvider";
+import { DialogContext } from "../../../context/dialogBoxProvider";
 import { ServiceLocator } from "../../../context/serviceProvider";
 import { useFetch } from "../../../hooks/useFetch";
 import { MainCartContainer, RightMainContainer } from "./styles";
@@ -15,6 +17,7 @@ import { MainCartContainer, RightMainContainer } from "./styles";
 const Cart = () => {
   const { setAppBarConfigs } = useContext(AppBarContext);
   const { productService, cartService } = useContext(ServiceLocator);
+  const { open, setOpen, setBody } = useContext(DialogContext);
 
   const [cartId, setCartId] = useState(0);
   const [cart, setCart] = useState(null);
@@ -80,7 +83,8 @@ const Cart = () => {
           rest,
           color: cartId === item.id ? "orange" : "transparent",
           onCartListItemClicked,
-          secondaryAction: <DeleteCartAction cartId={item.id} />,
+          secondaryAction: <></>,
+          // secondaryAction: <DeleteCartAction cartId={item.id} />,
         });
       })
     ) : loading ? (
@@ -121,6 +125,8 @@ const Cart = () => {
               console.log("error occured in deleting cart");
             });
         }}
+        open={open}
+        setOpen={setOpen}
       />
     );
   };
@@ -129,8 +135,6 @@ const Cart = () => {
     return (
       <CustomizedDialogs
         id={cartId}
-        Action={IconButton}
-        Icon={DeleteForever}
         message="Are you sure you want to delete ?"
         btnText="Delete"
         title="Delete Cart Item"
@@ -147,6 +151,13 @@ const Cart = () => {
         }}
       />
     );
+  };
+
+  const openD = (cartId, itemId) => {
+    setBody(() => () => (
+      <DeleteCartItemAction cartId={cartId} productId={itemId} />
+    ));
+    setOpen(true);
   };
 
   const RightContainer = () => {
@@ -180,7 +191,12 @@ const Cart = () => {
               image: item.image,
               width: "500px",
               secondaryAction: (
-                <DeleteCartItemAction cartId={cart.id} productId={item.id} />
+                <IcnButton
+                  icon={DeleteForever}
+                  size="medium"
+                  color="black"
+                  cb={() => openD(cart.id, item.id)}
+                />
               ),
             });
           })

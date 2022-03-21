@@ -31,13 +31,14 @@ const CustomAppBar = (props) => {
         sx={{
           width: `calc(100% - ${appBarConfig.drawerWidth}px)`,
           ml: `${appBarConfig.drawerWidth}px`,
+          backgroundColor: "orange"
         }}
       >
         <Toolbar className="tb">
           <IcnButton
             icon={ArrowCircleLeft}
             size="medium"
-            backgroundColor="#1976d2"
+            backgroundColor="orange"
             color="white"
             cb={() => navigate(-1)}
           />

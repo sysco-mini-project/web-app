@@ -1,17 +1,20 @@
 import { AppBarConfigProvider } from "./appBarConfigProvider";
+import DialogBoxProvider from "./dialogBoxProvider";
 import { SearchValueProvider } from "./SearchValueProvider";
 import { ServiceProvider } from "./serviceProvider";
 import { UserProvider } from "./userContext";
 
 const ContextProvider = ({ children }) => {
   return (
-    <ServiceProvider>
-      <AppBarConfigProvider>
-        <SearchValueProvider>
-          <UserProvider>{children}</UserProvider>
-        </SearchValueProvider>
-      </AppBarConfigProvider>
-    </ServiceProvider>
+    <DialogBoxProvider>
+      <ServiceProvider>
+        <AppBarConfigProvider>
+          <SearchValueProvider>
+            <UserProvider>{children}</UserProvider>
+          </SearchValueProvider>
+        </AppBarConfigProvider>
+      </ServiceProvider>
+    </DialogBoxProvider>
   );
 };
 

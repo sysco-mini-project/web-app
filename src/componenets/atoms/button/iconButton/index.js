@@ -10,6 +10,7 @@ const IcnButton = ({
   backgroundColor = "transparent",
   color = "black",
   size = "large",
+  disabled = false
 }) => {
   return (
     <label htmlFor={id}>
@@ -19,6 +20,7 @@ const IcnButton = ({
         component="span"
         onClick={cb}
         size={size}
+        disabled={disabled}
         sx={{ backgroundColor, color }}
       >
         <Icon />

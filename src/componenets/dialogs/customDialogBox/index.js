@@ -10,6 +10,7 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import Typography from "@mui/material/Typography";
 import { CustomLoader } from "../../loader";
+import { DialogContext } from "../../../context/dialogBoxProvider";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -51,37 +52,30 @@ BootstrapDialogTitle.propTypes = {
 
 const CustomizedDialogs = ({
   id,
-  Action,
-  Icon,
   message,
   btnText,
   title,
   fn,
   onSuccessCb,
 }) => {
-  const [open, setOpen] = React.useState(false);
   const [isLoading, setLoading] = React.useState(false);
+  const { open, setOpen } = React.useContext(DialogContext);
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
   const handleClose = () => {
+    console.log("close me");
     setOpen(false);
   };
 
   const submitAndClose = async () => {
-    setLoading(true)
+    setLoading(true);
     await fn();
-    setLoading(false)
+    setLoading(false);
     onSuccessCb(id);
     setOpen(false);
   };
 
   return (
     <div>
-      <Action variant="outlined" onClick={handleClickOpen}>
-        <Icon />
-      </Action>
       <BootstrapDialog
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
@@ -97,11 +91,13 @@ const CustomizedDialogs = ({
           <Typography gutterBottom>{message}</Typography>
         </DialogContent>
         <DialogActions>
-          {!isLoading ? <Button autoFocus onClick={submitAndClose}>
-            {btnText}
-          </Button>: 
-          <CustomLoader/>
-          }
+          {!isLoading ? (
+            <Button autoFocus onClick={submitAndClose}>
+              {btnText}
+            </Button>
+          ) : (
+            <CustomLoader />
+          )}
         </DialogActions>
       </BootstrapDialog>
     </div>

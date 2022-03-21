@@ -11,21 +11,30 @@ import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import {
   BaseCard,
-  CartItemContainer,
+  BottomCard,
   PostSavedMessageContainer,
   Quantity,
   StepContainer,
   StepOneContainer,
   StepperWrapper,
+  StepThreeContainer,
   StepTwoContainer,
 } from "./styles";
 import ItemCard from "../../../componenets/atoms/cards/card";
 import { Avatar, List } from "@mui/material";
 import { IcnButton } from "../../../componenets/atoms/button/iconButton";
-import { PlusOne, Remove, ShoppingCartCheckout } from "@mui/icons-material";
+import {
+  Add,
+  Check,
+  NavigateBefore,
+  NavigateNext,
+  Remove,
+  ShoppingCartCheckout,
+} from "@mui/icons-material";
 import CreateCartDialog from "../../../componenets/dialogs/createCart";
 import { CustomListItem } from "../../../componenets/listItem";
 import { OutLinedButton } from "../../../componenets/atoms/button/outLinedButton";
+import { orange } from "@mui/material/colors";
 
 const AddToCart = () => {
   let params = useParams();
@@ -157,11 +166,10 @@ const AddToCart = () => {
         {activeStep < steps.length ? (
           <StepContainer>
             <div className="back-btn-container">
-              <OutLinedButton
-                name="Back"
-                backgroundColor="orange"
-                color="white"
-                clickCb={handleBack}
+              <IcnButton
+                icon={NavigateBefore}
+                cb={handleBack}
+                backgroundColor="grey"
                 disabled={activeStep === 0}
               />
             </div>
@@ -170,11 +178,10 @@ const AddToCart = () => {
               {children[activeStep]}
             </div>
             <div className="next-btn-container">
-              <OutLinedButton
-                name={activeStep === steps.length - 1 ? "Finish" : "Next"}
-                backgroundColor="orange"
-                color="white"
-                clickCb={handleNext}
+              <IcnButton
+                icon={activeStep === steps.length - 1 ? Check : NavigateNext}
+                cb={handleNext}
+                backgroundColor="grey"
               />
             </div>
           </StepContainer>
@@ -200,33 +207,41 @@ const AddToCart = () => {
               header={{ avatar, title, subheader }}
               image={product.image}
               className="box"
-              height="240"
+              height="350"
               description={product.name}
+              Bottom={() => (
+                <Quantity>
+                  <div className="left">
+                    <div className="name">Add Quantity</div>
+
+                    <div className="quantities">
+                      <IcnButton
+                        icon={Remove}
+                        backgroundColor="grey"
+                        color="white"
+                        size="small"
+                        cb={() => setQuantity((i) => (i <= 1 ? i : i - 1))}
+                      />
+
+                      <div> {quantity}</div>
+                      <IcnButton
+                        icon={Add}
+                        backgroundColor="grey"
+                        color="white"
+                        size="small"
+                        cb={() => setQuantity((i) => i + 1)}
+                      />
+                    </div>
+                  </div>
+                  <div className="right">
+                    <div className="name">Total Amount</div>
+                    <div className="price">
+                      Rs {quantity * data?.product.price}
+                    </div>
+                  </div>
+                </Quantity>
+              )}
             />
-
-            <Quantity>
-              Quantity : {quantity}
-              <div className="total-container">
-                Total : {quantity * data?.product.price}
-              </div>
-              <div className="button-container">
-                <IcnButton
-                  icon={PlusOne}
-                  backgroundColor="orange"
-                  color="white"
-                  size="small"
-                  cb={() => setQuantity((i) => i + 1)}
-                />
-
-                <IcnButton
-                  icon={Remove}
-                  backgroundColor="orange"
-                  color="white"
-                  size="small"
-                  cb={() => setQuantity((i) => (i <= 1 ? i : i - 1))}
-                />
-              </div>
-            </Quantity>
           </BaseCard>
         ) : (
           <h2>Loading...</h2>
@@ -298,35 +313,44 @@ const AddToCart = () => {
     const title = product?.producer;
     const subheader = `Rs : ${product?.price} /=`;
     return (
-      <StepOneContainer>
+      <StepThreeContainer>
         {data?.product ? (
-          <BaseCard>
+          <div className="main-container">
             <ItemCard
               header={{ avatar, title, subheader }}
               image={product.image}
               className="box"
-              height="250"
+              height="280"
               description={product.name}
+              Bottom={() => (
+                <BottomCard>
+                  <div className="left">
+                    <div className="name">Quantity</div>
+                    <div className="amount">{quantity}</div>
+                  </div>
+
+                  <div className="right">
+                    <div className="name">Total Price</div>
+                    <div className="amount">
+                      Rs {quantity * data?.product.price}
+                    </div>
+                  </div>
+                </BottomCard>
+              )}
             />
 
-            <Quantity>
-              Quantity : {quantity}
-              <div className="total-container">
-                Price : {quantity * data?.product.price}
+            <div className="cart-contaier">
+              <ShoppingCartCheckout sx={{ color: orange }} />
+              <div>
+                {" "}
+                add to cart : {data.carts.filter((i) => i.id === cart)[0].name}
               </div>
-            </Quantity>
-
-            <CartItemContainer>
-              <ShoppingCartCheckout />
-              <div className="cartName">
-                Add to cart : {data.carts.filter((i) => i.id === cart)[0].name}
-              </div>
-            </CartItemContainer>
-          </BaseCard>
+            </div>
+          </div>
         ) : (
           <h2>Loading...</h2>
         )}
-      </StepOneContainer>
+      </StepThreeContainer>
     );
   };
 
