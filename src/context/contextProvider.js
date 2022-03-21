@@ -1,6 +1,6 @@
 import { AppBarConfigProvider } from "./appBarConfigProvider";
 import DialogBoxProvider from "./dialogBoxProvider";
-import { SearchValueProvider } from "./SearchValueProvider";
+import { SearchValueProvider } from "./searchValueProvider";
 import { ServiceProvider } from "./serviceProvider";
 import { UserProvider } from "./userContext";
 

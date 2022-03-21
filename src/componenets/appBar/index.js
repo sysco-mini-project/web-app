@@ -1,4 +1,4 @@
-import { AppBar, Avatar, IconButton, Toolbar, Typography } from "@mui/material";
+import { AppBar, Avatar, Toolbar, Typography } from "@mui/material";
 import { useCallback, useContext, useEffect, useState } from "react";
 import { AppBarContext } from "../../context/appBarConfigProvider";
 import { SearchBar } from "../atoms/searchBar";
@@ -8,7 +8,6 @@ import { ServiceLocator } from "../../context/serviceProvider";
 import { UserContext } from "../../context/userContext";
 import { orange } from "@mui/material/colors";
 import { useNavigate } from "react-router-dom";
-import { SearchValueContext } from "../../context/SearchValueProvider";
 import { IcnButton } from "../atoms/button/iconButton";
 import { ArrowCircleLeft } from "@mui/icons-material";
 
@@ -83,53 +82,6 @@ const CustomAppBar = (props) => {
         </Toolbar>
       </AppBar>
     </AppBarContainer>
-
-    // <HideOnScroll {...props}>
-    //   <AppBarContainer>
-    //     <AppBar
-    //       className="appBar"
-    //       position="fixed"
-    //       sx={{ width: `calc(100vw - 260px)`, ml: `260px` }}
-    //     >
-    //       <Toolbar className="tb">
-    //         <Typography variant="h6" component="div" className="comp">
-    //           {appBarConfig.name ?? "App bar"}
-    //         </Typography>
-
-    //         {appBarConfig.searchBar ? <SearchBar /> : <></>}
-
-    //         <div className="buttonBox">
-    //           {currentUser ? (
-    //             <div className="visible-to-logged-user">
-    //               {appBarConfig.cartIcon ? (
-    //                 <ShoppingCartContainer onClick={clickCart}>
-    //                   <ShoppingCart />
-    //                 </ShoppingCartContainer>
-    //               ) : (
-    //                 <></>
-    //               )}
-
-    //               <Avatar
-    //                 sx={{ bgcolor: "white", color: orange[500] }}
-    //                 aria-label="recipe"
-    //               >
-    //                 {currentUser.firstName.charAt(0).toUpperCase()}
-    //               </Avatar>
-    //             </div>
-    //           ) : (
-    //             <OutLinedButton
-    //               name="Login"
-    //               size="large"
-    //               color="white"
-    //               backgroundColor="transparent"
-    //               clickCb={signInCb}
-    //             />
-    //           )}
-    //         </div>
-    //       </Toolbar>
-    //     </AppBar>
-    //   </AppBarContainer>
-    // </HideOnScroll>
   );
 };
 

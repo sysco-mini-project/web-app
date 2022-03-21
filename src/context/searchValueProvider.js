@@ -4,13 +4,16 @@ export const SearchValueContext = createContext();
 
 // This context provider is passed to any component requiring the context
 export const SearchValueProvider = ({ children }) => {
-  const [searchValue, setSearchValue] = useState({text : '', btnState : true});
+  const [text, setText] = useState("");
+  const [btnState, setBtnState] = useState(true);
 
   return (
     <SearchValueContext.Provider
       value={{
-        searchValue,
-        setSearchValue,
+        text,
+        setText,
+        btnState,
+        setBtnState,
       }}
     >
       {children}

@@ -5,11 +5,11 @@ import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import { Search } from "./style";
 import { Cancel } from "@mui/icons-material";
-import { SearchValueContext } from "../../../context/SearchValueProvider";
+import { SearchValueContext } from "../../../context/searchValueProvider";
 
 const SearchBar = () => {
   const [focused, setFoucused] = React.useState(false);
-  const { setSearchValue } = React.useContext(SearchValueContext);
+  const { setText, setBtnState } = React.useContext(SearchValueContext);
 
   return (
     <Search>
@@ -36,7 +36,7 @@ const SearchBar = () => {
           onChange={(event) => {
             if (event?.target?.value != null) {
               let setStateTimeout = setTimeout(()=> {
-                setSearchValue({text : event?.target?.value, btnState : true});
+                setText( event?.target?.value);
                 clearTimeout(setStateTimeout)
               }, 500)
             }
@@ -50,7 +50,7 @@ const SearchBar = () => {
           }}
           aria-label="search"
           onClick={() => {
-            setSearchValue({text : '', btnState : !focused});
+            setBtnState(!focused);
             setFoucused((pre) => !pre);
           }}
         >

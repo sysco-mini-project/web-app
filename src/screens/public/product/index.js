@@ -2,7 +2,7 @@ import { useCallback, useContext, useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ProductCard } from "../../../componenets/productCard";
 import { AppBarContext } from "../../../context/appBarConfigProvider";
-import { SearchValueContext } from "../../../context/SearchValueProvider";
+import { SearchValueContext } from "../../../context/searchValueProvider";
 import { ServiceLocator } from "../../../context/serviceProvider";
 import { UserContext } from "../../../context/userContext";
 import { useFetch } from "../../../hooks/useFetch";
@@ -15,7 +15,7 @@ const Product = () => {
 
   const { productService } = useContext(ServiceLocator);
   const { setAppBarConfigs } = useContext(AppBarContext);
-  const { searchValue } = useContext(SearchValueContext);
+  const { text, btnState } = useContext(SearchValueContext);
   const { currentUser, setCurrentUser } = useContext(UserContext);
   const { authService } = useContext(ServiceLocator);
 
@@ -56,16 +56,26 @@ const Product = () => {
       return;
     }
 
-    if (searchValue && searchValue.text && searchValue.text.trim()) {
+    if (text && text?.trim()) {
       productService
-        .searchProducByName(params.id, searchValue.text)
+        .searchProducByName(params.id, text.trim())
         .then((res) => {
           setData(res.data);
         })
         .catch((err) => {
           console.log(err);
         });
-    } else if (searchValue && !searchValue.btnState) {
+    }
+  }, [text]);
+
+  //Listerner to the search value
+  useEffect(() => {
+    if (firstUpdate.current) {
+      firstUpdate.current = false;
+      return;
+    }
+
+    if (!btnState) {
       productService
         .getAllProductsByCategory(params.id)
         .then((res) => {
@@ -75,7 +85,7 @@ const Product = () => {
           console.log(err);
         });
     }
-  }, [searchValue]);
+  }, [btnState]);
 
   const clickCb = useCallback((id) => {
     navigate(`/addToCart/${id}`);
