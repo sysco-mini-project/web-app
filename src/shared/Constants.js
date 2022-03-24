@@ -1,3 +1,3 @@
 export const ACCESS_TOKEN = "accessToken"
 
-export const BASE_URL= "http://173.82.57.186:8080"
+export const BASE_URL= "https://MyALB-364017831.us-east-1.elb.amazonaws.com:8443"

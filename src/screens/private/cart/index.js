@@ -83,8 +83,14 @@ const Cart = () => {
           rest,
           color: cartId === item.id ? "orange" : "transparent",
           onCartListItemClicked,
-          secondaryAction: <></>,
-          // secondaryAction: <DeleteCartAction cartId={item.id} />,
+          secondaryAction: (
+            <IcnButton
+              icon={DeleteForever}
+              size="medium"
+              color="black"
+              cb={() => openCartDeleteDialog(item.id)}
+            />
+          ),
         });
       })
     ) : loading ? (
@@ -101,9 +107,14 @@ const Cart = () => {
 
   const onDeleteCart = useCallback(async (id) => {
     const carts = await getUserCarts();
-    setData(carts);
+    setData(carts.data);
     setCart(null);
   }, []);
+
+  const openCartDeleteDialog = (cartId) => {
+    setBody(() => () => <DeleteCartAction cartId={cartId} />);
+    setOpen(true);
+  };
 
   const DeleteCartAction = ({ cartId }) => {
     return (
@@ -125,8 +136,7 @@ const Cart = () => {
               console.log("error occured in deleting cart");
             });
         }}
-        open={open}
-        setOpen={setOpen}
+        DeleteCartAction
       />
     );
   };
@@ -153,7 +163,7 @@ const Cart = () => {
     );
   };
 
-  const openD = (cartId, itemId) => {
+  const openCartItemDeleteDialog = (cartId, itemId) => {
     setBody(() => () => (
       <DeleteCartItemAction cartId={cartId} productId={itemId} />
     ));
@@ -195,7 +205,7 @@ const Cart = () => {
                   icon={DeleteForever}
                   size="medium"
                   color="black"
-                  cb={() => openD(cart.id, item.id)}
+                  cb={() => openCartItemDeleteDialog(cart.id, item.id)}
                 />
               ),
             });
