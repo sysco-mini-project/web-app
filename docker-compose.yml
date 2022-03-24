@@ -1,0 +1,12 @@
+version: "2"
+services:
+  sysco-web-app:
+    image: 730492015407.dkr.ecr.us-east-1.amazonaws.com/sysco-mini-app-web:latest
+    restart: always
+#    environment:
+#      - _JAVA_OPTIONS=-Xmx512m -Xms256m
+#      - SPRING_PROFILES_ACTIVE=prod
+    ports:
+      - "3000:80"
+
+

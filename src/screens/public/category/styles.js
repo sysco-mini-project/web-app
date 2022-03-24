@@ -26,7 +26,6 @@ export const ParallaxContainer = styled.div.attrs((props) => ({}))`
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  /* background-color: red; */
 `;
 
 export const Row = styled.div`
