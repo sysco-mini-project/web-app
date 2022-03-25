@@ -8,7 +8,7 @@ const awsAuth = {
       "aws.cognito.signin.user.admin"
     ],
     "redirectSignIn": "https://sysco-eag-mini.online",
-    "redirectSignOut": "https://sysco-eag-mini.online/categories",
+    "redirectSignOut": "https://sysco-eag-mini.online",
     "responseType": "token"
   }
 

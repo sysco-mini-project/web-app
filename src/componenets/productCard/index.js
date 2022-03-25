@@ -1,11 +1,12 @@
 import { Avatar } from "@mui/material";
-import { withTheme } from "styled-components";
 import ItemCard from "../atoms/cards/card";
 import { BaseCard, ButtomBar } from "./styles";
 import Button from "@mui/material/Button";
-import { CardTravel } from "@mui/icons-material";
+import { CardTravel, NavigateBefore } from "@mui/icons-material";
+import { IcnButton } from "../atoms/button/iconButton";
+import InfoIcon from '@mui/icons-material/Info';
 
-const ProductCard = ({ item, width: w, height: h,  clickCb}) => {
+const ProductCard = ({ item, width: w, height: h,  clickCb, openDialog}) => {
 
   const avatar = <Avatar alt="Remy Sharp" src={item.producerImage} />;
   const title = item.producer;
@@ -28,6 +29,13 @@ const ProductCard = ({ item, width: w, height: h,  clickCb}) => {
         height="194"
         description={item.name}
         Bottom={addToCartBtn}
+        Action = {
+          <IcnButton
+                icon={InfoIcon}
+                cb={() => openDialog(item)}
+                backgroundColor="grey"
+              />
+        }
       />
     </BaseCard>
   );

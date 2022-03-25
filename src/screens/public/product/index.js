@@ -1,8 +1,10 @@
 import { LinearProgress } from "@mui/material";
 import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { ViewProductDialog } from "../../../componenets/dialogs/viewProduct";
 import { ProductCard } from "../../../componenets/productCard";
 import { AppBarContext } from "../../../context/appBarConfigProvider";
+import { DialogContext } from "../../../context/dialogBoxProvider";
 import { SearchValueContext } from "../../../context/searchValueProvider";
 import { ServiceLocator } from "../../../context/serviceProvider";
 import { UserContext } from "../../../context/userContext";
@@ -13,6 +15,7 @@ const Product = () => {
   let params = useParams();
   let navigate = useNavigate();
   const firstUpdate = useRef(true);
+  const { open, setOpen, setBody } = useContext(DialogContext);
 
   const [category, setCategory] = useState("");
   const { productService } = useContext(ServiceLocator);
@@ -52,14 +55,12 @@ const Product = () => {
       });
   };
 
-
   useEffect(() => {
     setAppBarConfigs((prev) => {
       return { ...prev, name: "Products", searchBar: true };
     });
     getCategory(params.id);
     checkUser();
-    
   }, []);
 
   //Listerner to the search value
@@ -101,6 +102,10 @@ const Product = () => {
     }
   }, [btnState]);
 
+  const openDialog = (item) => {
+    setBody(() => () => <ViewProductDialog item={item} />);
+    setOpen(true);
+  };
 
   const clickCb = useCallback((id) => {
     navigate(`/addToCart/${id}`);
@@ -121,6 +126,7 @@ const Product = () => {
               height: "320px",
               width: "300px",
               clickCb,
+              openDialog,
             });
           })
         ) : (
