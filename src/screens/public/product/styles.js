@@ -8,6 +8,17 @@ export const ProductMainWrapper = styled.div.attrs((props) => ({}))`
   align-items: center;
 `;
 
+export const ProductHeader = styled.div`
+  width: 90%;
+  height: 100%;
+
+  .name {
+    font-size: xx-large;
+    font-family: sans-serif;
+    font-weight: 600;
+  }
+`;
+
 export const ProductContainer = styled.div.attrs((props) => ({}))`
   width: 100vw;
   height: 100%;

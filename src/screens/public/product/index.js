@@ -1,5 +1,5 @@
 import { LinearProgress } from "@mui/material";
-import { useCallback, useContext, useEffect, useRef } from "react";
+import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ProductCard } from "../../../componenets/productCard";
 import { AppBarContext } from "../../../context/appBarConfigProvider";
@@ -7,13 +7,14 @@ import { SearchValueContext } from "../../../context/searchValueProvider";
 import { ServiceLocator } from "../../../context/serviceProvider";
 import { UserContext } from "../../../context/userContext";
 import { useFetch } from "../../../hooks/useFetch";
-import { ProductMainWrapper, Row } from "./styles";
+import { ProductHeader, ProductMainWrapper, Row } from "./styles";
 
 const Product = () => {
   let params = useParams();
   let navigate = useNavigate();
   const firstUpdate = useRef(true);
 
+  const [category, setCategory] = useState("");
   const { productService } = useContext(ServiceLocator);
   const { setAppBarConfigs } = useContext(AppBarContext);
   const { text, btnState } = useContext(SearchValueContext);
@@ -33,9 +34,6 @@ const Product = () => {
       .getCurrentUser()
       .then((res) => {
         setCurrentUser(res.data);
-        setAppBarConfigs((prev) => {
-          return { ...prev, drawerWidth: 240 };
-        });
       })
       .catch((err) => {
         console.log("error occurred in getting current user");
@@ -43,17 +41,32 @@ const Product = () => {
       });
   };
 
+  const getCategory = async (id) => {
+    await productService
+      .getCategoryById(id)
+      .then((res) => {
+        setCategory(res.data);
+      })
+      .catch((err) => {
+        console.log("error occured in getting category by id");
+      });
+  };
+
+
   useEffect(() => {
     setAppBarConfigs((prev) => {
       return { ...prev, name: "Products", searchBar: true };
     });
+    getCategory(params.id);
     checkUser();
+    
   }, []);
 
   //Listerner to the search value
   useEffect(() => {
     if (firstUpdate.current) {
       firstUpdate.current = false;
+
       return;
     }
 
@@ -88,11 +101,16 @@ const Product = () => {
     }
   }, [btnState]);
 
+
   const clickCb = useCallback((id) => {
     navigate(`/addToCart/${id}`);
   }, null);
   return (
     <ProductMainWrapper>
+      <ProductHeader>
+        <div className="name">Category / {category?.name}</div>
+      </ProductHeader>
+
       <Row>
         {(products ?? []).length === 0 ? (
           <h2>No products available....</h2>

@@ -106,9 +106,14 @@ const Cart = () => {
   }, []);
 
   const onDeleteCart = useCallback(async (id) => {
-    const carts = await getUserCarts();
-    setData(carts.data);
-    setCart(null);
+    await getUserCarts()
+      .then((res) => {
+        setData(res.data);
+        setCart(null);
+      })
+      .catch((err) => {
+        console.log("error occured in deleting cart");
+      });
   }, []);
 
   const openCartDeleteDialog = (cartId) => {
