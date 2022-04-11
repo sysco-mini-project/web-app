@@ -15,8 +15,8 @@ const awsmobile = {
             "profile",
             "aws.cognito.signin.user.admin"
         ],
-        "redirectSignIn": "http://localhost:4000/",
-        "redirectSignOut": "http://localhost:4000/logout/",
+        "redirectSignIn": "https://sysco-eag-mini.online",
+        "redirectSignOut": "https://sysco-eag-mini.online",
         "responseType": "token"
     },
     "federationTarget": "COGNITO_USER_POOLS",

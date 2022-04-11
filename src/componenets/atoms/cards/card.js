@@ -29,8 +29,8 @@ const ItemCard = ({
   image,
   description,
   height = 194,
-  actions = [],
   Bottom = DefaultBottom,
+  Action = <></>
 }) => {
   const [expanded, setExpanded] = React.useState(false);
 
@@ -53,6 +53,13 @@ const ItemCard = ({
       component = React.cloneElement(component, {
         subheader: header.subheader,
       });
+    }
+
+    if(Action){
+      component = React.cloneElement(component, {
+        action: Action,
+      });
+
     }
 
     return component;
