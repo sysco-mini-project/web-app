@@ -27,7 +27,6 @@ function AuthProvider() {
         console.log(res);
       })
       .catch((e) => {
-        console.log("Error occurred");
         console.log(e);
       });
   };
