@@ -10,14 +10,11 @@ function AuthProvider() {
     Hub.listen("auth", ({ payload: { event, data } }) => {
       switch (event) {
         case "signIn":
-          console.log("data received");
           cb({
             idToken: data.signInUserSession.idToken.jwtToken,
           });
           break;
         case "signOut":
-          console.log("sign out");
-          // this.setState({ user: null })
           break;
       }
     });
