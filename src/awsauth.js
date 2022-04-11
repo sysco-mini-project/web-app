@@ -7,10 +7,9 @@ const awsAuth = {
       "openid",
       "aws.cognito.signin.user.admin"
     ],
-    "redirectSignIn": "http://localhost:3000",
-    "redirectSignOut": "http://localhost:3000/signout",
+    "redirectSignIn": "https://sysco-eag-mini.online",
+    "redirectSignOut": "https://sysco-eag-mini.online",
     "responseType": "token"
   }
 
-  
 export default awsAuth;

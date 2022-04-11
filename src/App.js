@@ -1,34 +1,32 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
-import "./App.css";
-import { AuthProvider } from "./wrapper/aws/authProviderService";
+import { useContext, useEffect } from "react";
+import { UserContext } from "./context/userContext";
+import { Home } from "./screens/home";
+import { ServiceLocator } from "./context/serviceProvider";
+import { AppBarContext } from "./context/appBarConfigProvider";
 
 const App = () => {
-  const authProvider = AuthProvider();
+  const { authService } = useContext(ServiceLocator);
+  const { setCurrentUser } = useContext(UserContext);
+  const { setAppBarConfigs } = useContext(AppBarContext);
 
-  authProvider.initializeUiListner((data) => {
+  authService.initializeUiListner((data) => {
     console.log(data);
+    authService
+      .getCurrentUser()
+      .then((res) => {
+        setCurrentUser(res.data);
+        setAppBarConfigs((prev) => {
+          return { ...prev, searchBar: false, drawerWidth: 240 };
+        });
+      })
+      .catch((err) => {
+        console.log("error occurred in getting current user");
+        console.log(err);
+      });
   });
 
-  return (
-    <div className="App">
-      <div className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h2>Welcome to React</h2>
-        <button
-          onClick={() => {
-            authProvider.federatedSignIn();
-          }}
-        >
-          {" "}
-          Signin
-        </button>
-      </div>
-      <p className="App-intro">
-        To get started, edit <code>src/App.js</code> and save to reload.
-      </p>
-    </div>
-  );
+  return <Home></Home>;
 };
 
 export default App;
